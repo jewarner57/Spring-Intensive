@@ -3,7 +3,9 @@ import './style.css';
 
 function LandingPage() {
   return (
-    <Header></Header>
+    <div className="landing-page">
+      <Header></Header>
+    </div>
   );
 }
 
