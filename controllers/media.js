@@ -22,6 +22,13 @@ exports.savemedia = async (req, res) => {
 }
 
 // GET MEDIA
-exports.getmedia = (req, res) => {
+exports.getmedia = async (req, res) => {
+  const mediaID = req.params.id
 
+  try {
+    const media = await Media.findOne({ _id: mediaID })
+    if (media) { res.send({ location: media.location, author: media.author }) }
+  } catch (err) {
+    res.status(404).send({ msg: 'unable to find post', err })
+  }
 }
