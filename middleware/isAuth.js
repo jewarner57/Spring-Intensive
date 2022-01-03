@@ -10,7 +10,7 @@ module.exports = function isAuth(req, res, next) {
   }
 
   // Decode the token
-  const decodedToken = jwt.verify(authHeader, process.env.SECRET_KEY, { complete: true }) || false;
+  const decodedToken = jwt.verify(authHeader, process.env.SECRET, { complete: true }) || false;
   if (!decodedToken) {
     return res.status(401).json({ error: 'User is not authenticated' })
   }
