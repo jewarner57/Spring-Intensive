@@ -8,15 +8,15 @@ export default function Header() {
   return (
     <div>
       <div className="navbar">
-        <div class="branding"><span>i</span>nview</div>
-        <div class="navlinks">
+        <div className="branding"><span>i</span>nmige</div>
+        <div className="navlinks">
           {/* is the user logged in */}
           {currentUser ?
-            <div class="navlink" onClick={() => signout()}>Sign out</div>
+            <div className="navlink button-primary" onClick={() => signout()}>Logout</div>
             :
             <React.Fragment>
-              <div class="navlink">Sign in</div>
-              <div class="navlink button-primary">Sign up</div>
+              <a href="/#/signin" className="navlink"><div>Login</div></a>
+              <a href="/#/signup" className="navlink"><div className="button-primary">Sign up</div></a>
             </React.Fragment>
           }
         </div>
