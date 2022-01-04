@@ -45,3 +45,15 @@ exports.getmedia = async (req, res) => {
     res.status(404).send({ msg: 'Unable to find post.', err })
   }
 }
+
+// GET A USER'S MEDIA
+exports.getusermedia = async (req, res) => {
+  const mediaID = req.params.id
+
+  try {
+    const media = await Media.find({ author: mediaID }).populate('author', 'username')
+    res.send({ media })
+  } catch (err) {
+    res.status(404).send({ msg: 'Unable to find user\'s posts.', err })
+  }
+}

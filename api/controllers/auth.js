@@ -7,12 +7,8 @@ exports.user = (req, res) => {
 }
 
 exports.getuser = (req, res) => {
-  if (!req.user) {
-    res.status(401)
-    return res.json({ message: 'not authorized' })
-  }
-
-  User.findOne({ _id: req.params.id })
+  // find a user with given id and return it
+  User.findOne({ _id: req.params.id }, 'username createdAt')
     .then((user) => res.send(user))
     .catch((err) => console.log(err))
 }

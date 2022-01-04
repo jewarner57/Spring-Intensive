@@ -8,6 +8,7 @@ import SigninPage from './pages/SignInPage'
 import UploadPage from './pages/UploadPage';
 import Header from './components/Header'
 import ViewPost from './pages/ViewPost';
+import Profile from './pages/Profile'
 import RequireAuth from './components/RequireAuth';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route element={<RequireAuth />}>
             <Route exact path="/newpost" element={<UploadPage />} />
             <Route exact path="/post/:id" element={<ViewPost />} />
+            <Route exact path="/profile/:id" element={<Profile />} />
           </Route>
 
           {/* 404 page */}
