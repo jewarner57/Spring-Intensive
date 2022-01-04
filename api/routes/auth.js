@@ -6,6 +6,8 @@ const router = express.Router()
 
 const authController = require('../controllers/auth')
 
+router.post('/', isAuth, authController.user)
+
 router.get('/:id', isAuth, authController.getuser)
 
 router.post('/signin', validateinput, authController.signin)

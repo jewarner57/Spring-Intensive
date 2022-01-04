@@ -5,9 +5,9 @@ import './style.css'
 export default function AuthForm(props) {
   return (
     <form className="formbody" onSubmit={props.handleFormSubmit}>
-      {props.fields.map((field) => {
+      {props.fields.map((field, index) => {
         return (
-          <React.Fragment>
+          <React.Fragment key={index}>
             <label htmlFor={field.id}>{field.label} {field.required ? "*" : ""}</label>
             <input id={field.id} type={field.type} className="form-field" val={field.val} onChange={(e) => field.setVal(e.target.value)} required={field.required} />
           </React.Fragment>

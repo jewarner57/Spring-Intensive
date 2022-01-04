@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+exports.user = (req, res) => {
+  const { _id, email, username } = req.user
+  return res.send({ user: { _id, email, username } })
+}
+
 exports.getuser = (req, res) => {
   if (!req.user) {
     res.status(401)

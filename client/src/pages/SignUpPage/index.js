@@ -19,7 +19,7 @@ export default function SignupPage(props) {
     setLoading(true)
 
     try {
-      await signup(email, password)
+      await signup(username, email, password)
       setLoading(false)
       navigate('/#/')
     }
@@ -43,15 +43,15 @@ export default function SignupPage(props) {
             fields={[
               {
                 id: "username", label: 'Username', required: true, type: 'text',
-                val: { username }, setVal: { setUsername }
+                val: { username }, setVal: setUsername
               },
               {
                 id: "email", label: 'Email', required: true, type: 'email',
-                val: { email }, setVal: { setEmail }
+                val: { email }, setVal: setEmail
               },
               {
                 id: "password", label: 'Password', required: true, type: 'password',
-                val: { password }, setVal: { setPassword }
+                val: { password }, setVal: setPassword
               }
             ]}
           />
