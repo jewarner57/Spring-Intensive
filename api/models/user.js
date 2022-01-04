@@ -4,10 +4,9 @@ const bcrypt = require('bcryptjs');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  password: { type: String, select: false },
+  username: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   email: { type: String, required: true },
-  createdChallenges: [{ type: Schema.Types.ObjectId, ref: 'Challenge' }],
-  solvedChallenges: [{ type: Schema.Types.ObjectId, ref: 'Challenge' }],
 }, { timestamps: true });
 
 // Must use function here! ES6 => functions do not bind this!
