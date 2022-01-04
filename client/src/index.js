@@ -8,6 +8,7 @@ import SignupPage from './pages/SignUpPage'
 import SigninPage from './pages/SignInPage'
 import UploadPage from './pages/UploadPage';
 import Header from './components/Header'
+import ViewPost from './pages/ViewPost';
 import './index.css';
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
           <Route exact path="/signin" element={<SigninPage />} />
           <Route exact path="/signup" element={<SignupPage />} />
           <Route exact path="/newpost" element={<UploadPage />} />
+          <Route path="post/:id" render={<ViewPost />} />
 
           {/* 404 page */}
           <Route path="*" element={<Error404Page />} />

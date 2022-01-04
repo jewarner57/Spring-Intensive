@@ -18,11 +18,12 @@ exports.savemedia = async (req, res) => {
   if (alreadyExists) { return res.status(409).send({ msg: 'Media Already Saved' }) }
 
   // save the media and return its location
+
   try {
     const media = await newmedia.save()
     res.send({ msg: 'Media Saved Successfully', hash: media.location })
   } catch (err) {
-    res.send({ msg: 'Media could not be saved', hash: '', err })
+    res.status(400).send({ msg: 'Media could not be saved', hash: '', err })
   }
 }
 
@@ -31,8 +32,8 @@ exports.getmedia = async (req, res) => {
   const mediaID = req.params.id
 
   try {
-    const media = await Media.findOne({ _id: mediaID })
-    if (media) { res.send({ location: media.location, author: media.author }) }
+    const media = await Media.findOne({ _id: mediaID }).populate('author', 'username')
+    if (media) { res.send({ location: media.location, title: media.title, author: media.author }) }
   } catch (err) {
     res.status(404).send({ msg: 'Unable to find post.', err })
   }

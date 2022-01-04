@@ -12,7 +12,10 @@ export default function Header() {
       <div className="navbar">
         <div className="navbrand">
           <a href="/#/" className="navlink"><div className="branding"><span>i</span>nmige</div></a>
-          <a href="/#/newpost" className="navlink"><div className="button-primary">New Post</div></a>
+          {currentUser ?
+            <a href="/#/newpost" className="navlink"><div className="button-primary">New Post</div></a>
+            : ''
+          }
         </div>
         <div className="navlinks">
           {/* is the user logged in */}

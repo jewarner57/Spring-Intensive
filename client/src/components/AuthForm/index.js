@@ -9,7 +9,16 @@ export default function AuthForm(props) {
         return (
           <React.Fragment key={index}>
             <label htmlFor={field.id}>{field.label} {field.required ? "*" : ""}</label>
-            <input id={field.id} type={field.type} className="form-field" val={field.val} onChange={(e) => field.setVal(e.target.value)} required={field.required} />
+            <input
+              id={field.id}
+              type={field.type}
+              className="form-field"
+              val={field.val}
+              onChange={(e) => {
+                field.type === 'file' ? field.setVal(e.target.files[0]) : field.setVal(e.target.value)
+              }}
+              required={field.required}
+            />
           </React.Fragment>
         )
       })}
