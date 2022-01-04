@@ -8,11 +8,11 @@ module.exports = function (req, res, next) {
   }
 
   if ((![email, password].every(Boolean))) {
-    return res.status(400).json({ error: 'Missing Credentials' });
+    return res.status(400).json({ err: 'Missing Credentials' });
   }
 
   if (!validEmail(email)) {
-    return res.status(400).json({ error: 'Invalid Email' });
+    return res.status(400).json({ err: 'Invalid Email' });
   }
 
   next();

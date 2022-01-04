@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router';
+import AuthForm from '../../components/AuthForm';
 import './style.css'
 
 
 export default function SignupPage(props) {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [username, setUsername] = useState()
   const [error, setError] = useState()
   const { signup } = useAuth()
   const [loading, setLoading] = useState(false)
@@ -33,15 +35,26 @@ export default function SignupPage(props) {
         <div className="paper">
           <p className="form-intro">Welcome,</p>
           <h2 className="form-title">Create an account</h2>
-          <form className="formbody" noValidate onSubmit={handleFormSubmit}>
-            <label htmlFor="email">Email *</label>
-            <input id="email" type="email" className="form-field" val={email} onChange={(e) => setEmail(e.target.value)} />
-
-            <label htmlFor="email">Password *</label>
-            <input id="password" type="password" className="form-field" val={password} onChange={(e) => setPassword(e.target.value)} />
-            {error ? <p className="error-text">{error}</p> : ""}
-            <button className="submit-button" disabled={loading}>SIGNUP NOW</button>
-          </form >
+          <AuthForm
+            error={error}
+            loading={loading}
+            submitText="SIGNUP NOW"
+            handleFormSubmit={handleFormSubmit}
+            fields={[
+              {
+                id: "username", label: 'Username', required: true, type: 'text',
+                val: { username }, setVal: { setUsername }
+              },
+              {
+                id: "email", label: 'Email', required: true, type: 'email',
+                val: { email }, setVal: { setEmail }
+              },
+              {
+                id: "password", label: 'Password', required: true, type: 'password',
+                val: { password }, setVal: { setPassword }
+              }
+            ]}
+          />
         </div>
       </div>
     </React.Fragment >

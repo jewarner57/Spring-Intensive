@@ -1,0 +1,23 @@
+.signup-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-primary-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-intro, .form-title {
+  margin: 10px 0;
+  font-weight: 400;
+  color:rgb(42, 42, 42);
+}
+
+.paper {
+  max-width: 400px;
+  width: 50%;
+  background-color: rgb(245, 245, 245);
+  padding: 40px 60px;
+  border-radius: 5px;
+}

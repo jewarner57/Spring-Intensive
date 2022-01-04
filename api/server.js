@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const exphbs = require('express-handlebars');
+const cors = require('cors')
 
 const authRoutes = require('./routes/auth')
 const mediaRoutes = require('./routes/media')
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors())
 
 // Use handlebars view engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));

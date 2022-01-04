@@ -12,7 +12,7 @@ module.exports = function isAuth(req, res, next) {
   // Decode the token
   const decodedToken = jwt.verify(authHeader, process.env.SECRET, { complete: true }) || false;
   if (!decodedToken) {
-    return res.status(401).json({ error: 'User is not authenticated' })
+    return res.status(401).json({ err: 'User is not authenticated' })
   }
 
   // Set the current user
