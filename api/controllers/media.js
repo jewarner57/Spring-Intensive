@@ -33,7 +33,14 @@ exports.getmedia = async (req, res) => {
 
   try {
     const media = await Media.findOne({ _id: mediaID }).populate('author', 'username')
-    if (media) { res.send({ location: media.location, title: media.title, author: media.author }) }
+    if (media) {
+      res.send({
+        location: media.location,
+        title: media.title,
+        author: media.author,
+        createdAt: media.createdAt,
+      })
+    }
   } catch (err) {
     res.status(404).send({ msg: 'Unable to find post.', err })
   }
