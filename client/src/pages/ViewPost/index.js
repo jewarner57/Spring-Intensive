@@ -19,7 +19,6 @@ export default function ViewPost() {
         credentials: 'include'
       })
       const content = await res.json();
-      console.log(content)
 
       // If the response is not 200 throw an error
       if (res.status !== 200) {

@@ -7,7 +7,8 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState('')
+  const [loading, setLoading] = useState(true)
 
   async function signup(username, email, password) {
     // signup user
@@ -92,9 +93,11 @@ export function AuthProvider({ children }) {
 
       if (res.status === 200) {
         setCurrentUser(content.user)
+        setLoading(false)
         return
       }
       setCurrentUser()
+      setLoading(false)
 
     }
     catch (err) {
@@ -115,7 +118,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {loading ? '' : children}
     </AuthContext.Provider>
   )
 }
