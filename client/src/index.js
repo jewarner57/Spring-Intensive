@@ -6,6 +6,7 @@ import Error404Page from './pages/Error404Page'
 import LandingPage from './pages/LandingPage'
 import SignupPage from './pages/SignUpPage'
 import SigninPage from './pages/SignInPage'
+import UploadPage from './pages/UploadPage';
 import Header from './components/Header'
 import './index.css';
 
@@ -19,6 +20,7 @@ ReactDOM.render(
 
           <Route exact path="/signin" element={<SigninPage />} />
           <Route exact path="/signup" element={<SignupPage />} />
+          <Route exact path="/newpost" element={<UploadPage />} />
 
           {/* 404 page */}
           <Route path="*" element={<Error404Page />} />

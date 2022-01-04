@@ -23,6 +23,14 @@
 
 .branding {
   font-size: 1.7em;
+  margin-right: 20px;
+}
+
+.navbrand {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navlinks {
@@ -49,4 +57,8 @@
   background-color: var(--teal-secondary);
   font-weight: bold;
   border-radius: 2px;
+}
+
+.username {
+  font-size: 1.3em;
 }

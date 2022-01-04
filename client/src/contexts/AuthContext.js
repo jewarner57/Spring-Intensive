@@ -66,7 +66,6 @@ export function AuthProvider({ children }) {
   async function signout() {
     // logout user
     // clear user info from local storage
-
     const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/signout`, {
       method: 'POST',
       credentials: 'include',
