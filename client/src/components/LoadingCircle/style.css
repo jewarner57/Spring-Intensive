@@ -1,0 +1,31 @@
+#loading-wheel {
+  width: 100px;
+  height: 100px;
+  background: none;
+  border: 10px solid var(--teal-primary);
+  border-radius: 50%;
+  margin: 50px auto;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: rotate;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(70deg);
+  }
+  50% {
+    transform: rotate(290deg);
+  }
+  100% {
+    transform: rotate(70deg);
+  }
+}
+
+#loading-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--teal-secondary);
+  margin: 0px auto;
+  border-radius: 50%;
+}

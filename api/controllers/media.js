@@ -21,7 +21,7 @@ exports.savemedia = async (req, res) => {
 
   try {
     const media = await newmedia.save()
-    res.send({ msg: 'Media Saved Successfully', hash: media.location })
+    res.send({ msg: 'Media Saved Successfully', hash: media.location, id: media._id })
   } catch (err) {
     res.status(400).send({ msg: 'Media could not be saved', hash: '', err })
   }

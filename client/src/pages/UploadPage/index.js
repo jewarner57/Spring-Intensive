@@ -50,7 +50,7 @@ export default function UploadPage() {
       }
       setLoading(false)
 
-      navigate('/')
+      navigate(`/post/${content.id}`)
     }
     catch (err) {
       setLoading(false)

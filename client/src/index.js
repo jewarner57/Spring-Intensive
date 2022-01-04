@@ -22,7 +22,7 @@ ReactDOM.render(
           <Route exact path="/signin" element={<SigninPage />} />
           <Route exact path="/signup" element={<SignupPage />} />
           <Route exact path="/newpost" element={<UploadPage />} />
-          <Route path="post/:id" render={<ViewPost />} />
+          <Route exact path="/post/:id" element={<ViewPost />} />
 
           {/* 404 page */}
           <Route path="*" element={<Error404Page />} />
