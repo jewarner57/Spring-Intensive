@@ -12,7 +12,10 @@ export default function Header() {
         <div className="navlinks">
           {/* is the user logged in */}
           {currentUser ?
-            <div className="navlink button-primary" onClick={() => signout()}>Logout</div>
+            <React.Fragment>
+              <div>Hello, {currentUser.username}</div>
+              <div className="navlink button-primary" onClick={() => signout()}>Logout</div>
+            </React.Fragment>
             :
             <React.Fragment>
               <a href="/#/signin" className="navlink"><div>Login</div></a>

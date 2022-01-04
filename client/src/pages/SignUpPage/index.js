@@ -21,7 +21,7 @@ export default function SignupPage(props) {
     try {
       await signup(username, email, password)
       setLoading(false)
-      navigate('/#/')
+      navigate('/')
     }
     catch (err) {
       setError(err.message)

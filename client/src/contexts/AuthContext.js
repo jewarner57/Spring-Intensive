@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import Cookies from 'js-cookie'
 
 const AuthContext = React.createContext()
 
@@ -84,6 +83,7 @@ export function AuthProvider({ children }) {
   }
 
   async function getCurrentUser() {
+    // get and set the current user
     try {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/user/`, {
         method: 'GET',
