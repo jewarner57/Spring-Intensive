@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import Cookies from 'js-cookie'
 
 const AuthContext = React.createContext()
 
@@ -14,6 +15,7 @@ export function AuthProvider({ children }) {
     try {
       const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/signup`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -40,9 +42,10 @@ export function AuthProvider({ children }) {
     try {
       const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/signin`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password })
       });
@@ -67,30 +70,30 @@ export function AuthProvider({ children }) {
 
     const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/signout`, {
       method: 'POST',
+      credentials: 'include',
     });
 
     if (rawResponse.status === 200) {
-      localStorage.removeItem('currentUser')
       setCurrentUser(undefined)
     }
   }
 
   function updateCurrentUser(res) {
     // add user info to local storage
-    localStorage.setItem('currentUser', res.user)
     setCurrentUser(res.user)
   }
 
   async function getCurrentUser() {
     try {
-      const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/`, {
-        method: 'POST',
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/user/`, {
+        method: 'GET',
+        credentials: 'include',
       });
-      const content = await rawResponse.json();
+      const content = await res.json();
 
-      if (rawResponse.status === 200) {
-        localStorage.setItem('currentUser', content.user)
+      if (res.status === 200) {
         setCurrentUser(content.user)
+        return
       }
       setCurrentUser()
 
@@ -101,9 +104,7 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    // if a user is in local storage then set it as current user
     getCurrentUser()
-
   }, [])
 
   const value = {

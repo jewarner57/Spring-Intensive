@@ -3,9 +3,7 @@ require('./data/db')
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-const exphbs = require('express-handlebars');
 const cors = require('cors')
 
 const authRoutes = require('./routes/auth')
@@ -14,16 +12,11 @@ const mediaRoutes = require('./routes/media')
 const app = express();
 
 // Middlewares
-app.use(express.static('public'))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(expressValidator());
-app.use(cors())
-
-// Use handlebars view engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+app.use(cookieParser());
+app.use(cors({ origin: true, credentials: true }))
 
 // Routes
 app.use('/user', authRoutes)

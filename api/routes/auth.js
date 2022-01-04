@@ -6,7 +6,7 @@ const router = express.Router()
 
 const authController = require('../controllers/auth')
 
-router.post('/', isAuth, authController.user)
+router.get('/', isAuth, authController.user)
 
 router.get('/:id', isAuth, authController.getuser)
 
