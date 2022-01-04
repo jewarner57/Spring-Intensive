@@ -16,8 +16,8 @@
 }
 
 .post-image-wrapper {
-  max-width: 50%;
-  width: 50%;
+  max-width: 60%;
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,14 +28,16 @@
 
 .post-image-wrapper > img {
   object-fit: cover;
+  max-width: 100%;
+  object-position: center;
 }
 
 .post-content {
   font-family: 'Roboto', sans-serif;
   color: white;
   background-color: var(--bg-secondary-dark);
-  max-width: 50%;
-  width: 50%;
+  max-width: 40%;
+  width: 40%;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 20px;

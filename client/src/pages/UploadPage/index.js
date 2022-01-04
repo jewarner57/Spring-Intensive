@@ -11,7 +11,7 @@ export default function UploadPage() {
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const client = create(`${process.env.REACT_APP_IPFS_GATEWAY}`)
+  const client = create('https://ipfs.infura.io:5001/api/v0')
   const { currentUser } = useAuth()
 
   const handleFormSubmit = async (e) => {
