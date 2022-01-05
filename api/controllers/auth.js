@@ -36,7 +36,7 @@ exports.signup = async (req, res) => {
     res.json({ message: 'Account Creation Successful.', user })
   } catch (err) {
     console.log(err.message);
-    return res.status(400).send({ err });
+    return res.status(400).send({ message });
   }
 }
 
@@ -55,13 +55,13 @@ exports.signin = (req, res) => {
     .then((user) => {
       if (!user) {
         // User not found
-        return res.status(403).send({ message: 'Wrong Email or Password' });
+        return res.status(403).send({ err: 'Wrong Email or Password' });
       }
       // Check the password
       user.comparePassword(password, (err, isMatch) => {
         if (!isMatch) {
           // Password does not match
-          return res.status(403).send({ message: 'Wrong Email or password' });
+          return res.status(403).send({ err: 'Wrong Email or password' });
         }
         // Create a token
         const token = jwt.sign(
