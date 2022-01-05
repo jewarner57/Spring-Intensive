@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
 import './style.css';
@@ -7,19 +7,36 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([])
   const [error, setError] = useState()
-  const [start, setStart] = useState(0)
-  const [end, setEnd] = useState(4)
+  const [limit, setLimit] = useState(5)
+  const loader = useRef(null);
+
+  // Check if the loader div is intersecting the bottom of the screen
+  const handleObserver = useCallback((entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      // Load more posts
+      setLimit((prev) => prev + 5)
+      getPosts()
+      console.log(limit)
+    }
+  }, [limit]);
 
   useEffect(() => {
-    getPosts()
-  }, [])
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0
+    };
+    // When the user scrolls
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+  }, [handleObserver])
 
   const getPosts = async () => {
-    setLoading(true)
     setError()
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/media/get/${start}/${end}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + 5}`, {
         method: 'GET',
         credentials: 'include'
       })
@@ -31,8 +48,8 @@ export default function LandingPage() {
         setError(res.msg)
       }
       // set the content and leave loading state
-      const prev = posts
-      setPosts([...prev, ...content.media])
+      setPosts((prev) => [...prev, ...content.media])
+
       setLoading(false)
     }
     catch (err) {
@@ -45,11 +62,10 @@ export default function LandingPage() {
   return (
     <div className="landing-page">
       <div className="post-list">
+        <PostList posts={posts} />
         {error ? <p className="error">{error}</p> : ""}
-        {loading ? <LoadingCircle />
-          :
-          <PostList posts={posts} />
-        }
+        <LoadingCircle />
+        <div ref={loader}></div>
       </div>
     </div>
   );
