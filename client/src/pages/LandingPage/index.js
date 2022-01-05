@@ -1,39 +1,32 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
+import caughtUp from '../../images/finish-line.svg'
 import './style.css';
 
 export default function LandingPage() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
   const [error, setError] = useState()
-  const [limit, setLimit] = useState(5)
-  const loader = useRef(null);
+  const [limit, setLimit] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
 
-  // Check if the loader div is intersecting the bottom of the screen
-  const handleObserver = useCallback((entries) => {
-    const target = entries[0];
-    if (target.isIntersecting) {
-      // Load more posts
-      setLimit((prev) => prev + 5)
-      getPosts()
-      console.log(limit)
-    }
-  }, [limit]);
-
-  useEffect(() => {
-    const option = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 0
-    };
-    // When the user scrolls
-    const observer = new IntersectionObserver(handleObserver, option);
-    if (loader.current) observer.observe(loader.current);
-  }, [handleObserver])
+  const observer = useRef()
+  const loader = useCallback(node => {
+    if (loading) return
+    if (observer.current) observer.current.disconnect()
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        getPosts()
+      }
+    })
+    if (node) observer.current.observe(node)
+  }, [loading, hasMore])
 
   const getPosts = async () => {
     setError()
+    setLoading(true)
+    setLimit((prev) => prev + 5)
 
     try {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + 5}`, {
@@ -49,7 +42,7 @@ export default function LandingPage() {
       }
       // set the content and leave loading state
       setPosts((prev) => [...prev, ...content.media])
-
+      setHasMore(content.media.length > 0)
       setLoading(false)
     }
     catch (err) {
@@ -64,7 +57,14 @@ export default function LandingPage() {
       <div className="post-list">
         <PostList posts={posts} />
         {error ? <p className="error">{error}</p> : ""}
-        <LoadingCircle />
+        {hasMore ?
+          <LoadingCircle />
+          :
+          <div class="caughtup-container">
+            <img className="caughtup-img" src={caughtUp} alt="person resting" />
+          </div>
+        }
+
         <div ref={loader}></div>
       </div>
     </div>

@@ -65,6 +65,8 @@ exports.getmedia = async (req, res) => {
   try {
     const media = await Media.find().sort({ createdAt: -1 }).populate('author', 'username').limit(Number(end))
     const mediaArr = media.slice(start, end)
+
+    if (start > media.length) { return res.send({ media: [] }) }
     res.send({ media: mediaArr })
   } catch (err) {
     res.status(400).send({ msg: 'Unable to get posts', err })
