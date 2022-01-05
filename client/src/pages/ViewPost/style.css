@@ -1,8 +1,9 @@
 .view-post-page {
   background-color: var(--bg-primary-dark);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 120px;
+  padding-bottom: 20px;
 }
 
 .post-card {
@@ -24,6 +25,7 @@
   background-color: rgba(0, 0, 0, 0.562);
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  overflow: hidden;
 }
 
 .post-image-wrapper > img {
@@ -60,6 +62,8 @@
   align-items: center;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--bg-primary-dark);
+  color: white;
+  text-decoration: none;
 }
 
 .button-primary {

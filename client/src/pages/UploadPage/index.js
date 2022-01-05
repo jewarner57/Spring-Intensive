@@ -25,7 +25,6 @@ export default function UploadPage() {
     setLoading(true)
     const location = await uploadFileToIPFS()
     // If location is empty stop the upload
-    console.log(location)
     if (!location) {
       setLoading(false)
       return

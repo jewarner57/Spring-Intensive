@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
+import PostCard from '../../components/PostCard';
 import Error404Page from '../Error404Page'
 import './style.css';
 
@@ -59,10 +60,24 @@ export default function ViewPost() {
             <LoadingCircle />
             :
             <div className="profile">
-              <h1>{userContent.username}</h1>
-              {userPosts.map((post, index) => {
-                return <div key={post.location + index}><p>{post.title}</p></div>
-              })}
+              <div className="profile-top">
+              </div>
+              <div className="profile-bottom">
+                <div className="pfp">
+                  <p className="pfp-initial">{userContent.username[0].toUpperCase()}</p>
+                </div>
+
+                <p className="pf-username">{userContent.username[0].toUpperCase() + userContent.username.slice(1)}</p>
+
+                <div className="divide-line"></div>
+
+                <div className="post-container">
+                  {userPosts.map((post, index) => {
+                    return <PostCard key={post.location + index} post={post} index={index} />
+                  })}
+                </div>
+              </div>
+
             </div>
           }
         </div >

@@ -1,0 +1,26 @@
+.card-wrapper {
+  width: 100%;
+  background-color: var(--bg-primary-dark);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 40%);
+}
+
+.post-title {
+  color: white;
+  padding: 0 20px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-image {
+  width: 100%;
+  max-height: 600px;
+}
+
+.post-detail-link {
+  text-decoration: none;
+}

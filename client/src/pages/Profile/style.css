@@ -1,6 +1,66 @@
 .profile-page {
   background-color: var(--bg-primary-dark);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 100px;
+}
+
+.profile {
+  margin: auto;
+  width: 75%;
+}
+
+.profile-top {
+  width: 100%;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.63);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.profile-bottom {
+  max-width: 100%;
+  background-color: var(--bg-secondary-dark);
+  padding: 30px;
+}
+
+.pf-username {
+  margin: 10px;
+  font-size: 40px;
+  color: white;
+}
+
+.pfp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: var(--teal-primary);
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  margin-top: -100px;
+}
+
+.pfp-initial {
+  color: rgb(255, 255, 255);
+  user-select: none;
+  font-size: 40px;
+  margin: 0;
+}
+
+.divide-line {
+  width: 100%;
+  height: 5px;
+  background-color: rgba(124, 124, 124, 0.397);
+}
+
+.post-container {
+  margin-top: 30px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+  grid-auto-flow: row dense;
 }
