@@ -52,6 +52,21 @@ export default function ViewPost() {
     return `${month} ${day}, ${year}`
   }
 
+  // Divide post content over the four columns
+  // This is so that we can have grid items of different heights
+  const getPostsForColumn = (colNum, colName, colCount) => {
+    return (
+      <div className="post-column" style={{ gridArea: colName }}>
+        {userPosts.map((post, index) => {
+          if (index % colCount === colNum) {
+            return <PostCard key={post.location + index} post={post} index={index} />
+          }
+          return ""
+        })}
+      </div>
+    )
+  }
+
   return (
     <React.Fragment>
       {error ? error :
@@ -67,14 +82,21 @@ export default function ViewPost() {
                   <p className="pfp-initial">{userContent.username[0].toUpperCase()}</p>
                 </div>
 
-                <p className="pf-username">{userContent.username[0].toUpperCase() + userContent.username.slice(1)}</p>
+                <div className="user-info">
+                  <p className="pf-username">{userContent.username[0].toUpperCase() + userContent.username.slice(1)}</p>
+                  <div>
+                    <p className="user-info-item"><span>{userPosts.length}</span> Posts</p>
+                    <p className="user-info-item">Joined: <span>{formatDate(new Date(userContent.createdAt))}</span></p>
+                  </div>
+                </div>
 
                 <div className="divide-line"></div>
 
                 <div className="post-container">
-                  {userPosts.map((post, index) => {
-                    return <PostCard key={post.location + index} post={post} index={index} />
-                  })}
+                  {getPostsForColumn(1, 'c1', 4)}
+                  {getPostsForColumn(3, 'c2', 4)}
+                  {getPostsForColumn(2, 'c3', 4)}
+                  {getPostsForColumn(0, 'c4', 4)}
                 </div>
               </div>
 

@@ -60,7 +60,30 @@
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: auto;
+  grid-template-areas: "c1 c2 c3 c4";
   grid-gap: 20px;
-  grid-auto-flow: row dense;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info-item {
+  text-align: right;
+  color: white;
+
+}
+
+.user-info-item > span {
+  font-weight: bold;
+  color: var(--teal-secondary)
+}
+
+.post-column {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
 }
