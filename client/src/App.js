@@ -27,7 +27,7 @@ export default function App() {
           <Route element={<RequireAuth />}>
             <Route exact path="/newpost" element={<UploadPage />} />
             <Route exact path="/post/:id" element={<ViewPost />} />
-            <Route exact path="/profile/:id" element={<Profile />} />
+            <Route path="/profile/:id" element={<Profile />} />
           </Route>
 
           {/* 404 page */}

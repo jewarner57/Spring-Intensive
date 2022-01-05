@@ -1,16 +1,34 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Media = require('../models/media')
 
 exports.user = (req, res) => {
   const { _id, email, username } = req.user
   return res.send({ user: { _id, email, username } })
 }
 
-exports.getuser = (req, res) => {
+exports.getuserprofile = async (req, res) => {
   // find a user with given id and return it
-  User.findOne({ _id: req.params.id }, 'username createdAt')
-    .then((user) => res.send(user))
-    .catch((err) => console.log(err))
+  const userID = req.params.id
+  let userFields = 'username createdAt'
+
+  // If the current user gets their own profile
+  // display their email
+  if (userID === req.user._id) {
+    userFields = 'username createdAt email'
+  }
+
+  try {
+    const user = await User.findOne({ _id: userID }, userFields)
+    const media = await Media.find({ author: userID }).populate('author', 'username')
+
+    if (user) {
+      return res.send({ user, media })
+    }
+    res.status(404).send({ err: 'No profile found.' })
+  } catch (err) {
+    res.status(400).send({ err: 'Something went wrong finding the profile.', message: err })
+  }
 }
 
 // SIGN UP POST

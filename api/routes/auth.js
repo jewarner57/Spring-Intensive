@@ -8,7 +8,7 @@ const authController = require('../controllers/auth')
 
 router.get('/', isAuth, authController.user)
 
-router.get('/:id', isAuth, authController.getuser)
+router.get('/profile/:id', isAuth, authController.getuserprofile)
 
 router.post('/signin', validateinput, authController.signin)
 
