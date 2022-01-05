@@ -29,3 +29,22 @@
 .post-detail-link {
   text-decoration: none;
 }
+
+.post-action {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 7px;
+}
+
+.post-action > p {
+  margin: 7px 5px;
+}
+
+.post-action-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 10px;
+  margin: 0 10px;
+  border-top: 2px solid rgba(0, 0, 0, 0.247);
+}
