@@ -1,4 +1,5 @@
 const Media = require('../models/media')
+const Like = require('../models/like')
 
 // SAVE MEDIA
 exports.savemedia = async (req, res) => {
@@ -70,5 +71,30 @@ exports.getmedia = async (req, res) => {
     res.send({ media: mediaArr })
   } catch (err) {
     res.status(400).send({ msg: 'Unable to get posts', err })
+  }
+}
+
+// LIKE A POST
+exports.likeMedia = async (req, res) => {
+  if (!req.body.post_id) { return res.status(409).send({ msg: 'Missing Post ID' }) }
+
+  // If a like already exists then remove it
+  const likeExists = await Like.findOne({ user: req.user._id, media: req.body.post_id })
+  if (likeExists) {
+    try {
+      await Like.deleteOne({ user: req.user._id, media: req.body.post_id })
+      return res.send({ msg: 'like removed' })
+    } catch (err) {
+      return res.status(401).send({ msg: 'Could not remove like.' })
+    }
+  }
+
+  // Create a new like for this post
+  const newLike = new Like({ user: req.user._id, media: req.body.post_id })
+  try {
+    await newLike.save()
+    return res.send({ msg: 'post liked' })
+  } catch (err) {
+    return res.status(401).send({ msg: 'Could not like post.' })
   }
 }

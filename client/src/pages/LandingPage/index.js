@@ -10,6 +10,7 @@ export default function LandingPage() {
   const [error, setError] = useState()
   const [limit, setLimit] = useState(0)
   const [hasMore, setHasMore] = useState(true)
+  const postLoadAmount = 20
 
   const observer = useRef()
   const loader = useCallback(node => {
@@ -26,10 +27,10 @@ export default function LandingPage() {
   const getPosts = async () => {
     setError()
     setLoading(true)
-    setLimit((prev) => prev + 5)
+    setLimit((prev) => prev + postLoadAmount)
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + 5}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + postLoadAmount}`, {
         method: 'GET',
         credentials: 'include'
       })
