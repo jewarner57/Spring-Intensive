@@ -20,19 +20,23 @@ export default function Header() {
         <div className="navlinks">
           {/* is the user logged in */}
           {currentUser ?
-            <React.Fragment>
-              <a href={`/#/profile/${currentUser._id}`} className="navlink"><div className="username">{currentUser.username[0].toUpperCase() + currentUser.username.slice(1)}</div></a>
-              <a href={`/#/profile/${currentUser._id}`} className="navlink"><div className="button-primary">{currentUser.username[0].toUpperCase()}</div></a>
+            <>
+              {currentUser.username ?
+                <>
+                  <a href={`/#/profile/${currentUser._id}`} className="navlink"><div className="username">{currentUser.username[0].toUpperCase() + currentUser.username.slice(1)}</div></a>
+                  <a href={`/#/profile/${currentUser._id}`} className="navlink"><div className="button-primary">{currentUser.username[0].toUpperCase()}</div></a>
+                </>
+                : ''}
               <div className="navlink" onClick={() => {
                 signout()
                 navigate('/')
               }}>Logout</div>
-            </React.Fragment>
+            </>
             :
-            <React.Fragment>
+            <>
               <a href="/#/signin" className="navlink"><div>Login</div></a>
               <a href="/#/signup" className="navlink"><div className="button-primary">Sign up</div></a>
-            </React.Fragment>
+            </>
           }
         </div>
       </div>

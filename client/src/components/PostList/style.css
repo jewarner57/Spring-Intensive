@@ -1,0 +1,15 @@
+.post-container {
+  margin-top: 30px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "c1 c2 c3 c4";
+  grid-gap: 20px;
+}
+
+.post-column {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+}

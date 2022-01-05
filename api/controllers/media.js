@@ -28,7 +28,7 @@ exports.savemedia = async (req, res) => {
 }
 
 // GET MEDIA BY ID
-exports.getmedia = async (req, res) => {
+exports.getmediabyid = async (req, res) => {
   const mediaID = req.params.id
 
   try {
@@ -55,5 +55,18 @@ exports.getusermedia = async (req, res) => {
     res.send({ media })
   } catch (err) {
     res.status(404).send({ msg: 'Unable to find user\'s posts.', err })
+  }
+}
+
+// GET MEDIA
+exports.getmedia = async (req, res) => {
+  const { start, end } = req.params
+
+  try {
+    const media = await Media.find().sort({ createdAt: -1 }).populate('author', 'username').limit(Number(end))
+    const mediaArr = media.slice(start, end)
+    res.send({ media: mediaArr })
+  } catch (err) {
+    res.status(400).send({ msg: 'Unable to get posts', err })
   }
 }

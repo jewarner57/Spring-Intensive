@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
 import Error404Page from '../Error404Page';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 export default function ViewPost() {
@@ -9,8 +11,11 @@ export default function ViewPost() {
   const [postContent, setPostContent] = useState({})
   const [error, setError] = useState()
   const { id } = useParams();
+  const { clearUser } = useAuth()
+  const navigate = useNavigate()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     getPost()
   }, [id])
 
@@ -24,6 +29,11 @@ export default function ViewPost() {
       })
 
       const content = await res.json();
+
+      if (res.status === 401) {
+        clearUser()
+        navigate('/#/signin')
+      }
 
       // If the response is not 200 throw an error
       if (res.status !== 200) {

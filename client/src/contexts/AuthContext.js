@@ -77,6 +77,10 @@ export function AuthProvider({ children }) {
     }
   }
 
+  function clearUser() {
+    setCurrentUser()
+  }
+
   function updateCurrentUser(res) {
     // add user info to local storage
     setCurrentUser(res.user)
@@ -114,6 +118,7 @@ export function AuthProvider({ children }) {
     signup,
     login,
     signout,
+    clearUser,
   }
 
   return (
