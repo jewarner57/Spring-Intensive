@@ -30,16 +30,6 @@
   text-decoration: none;
 }
 
-.post-action {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 7px;
-}
-
-.post-action > p {
-  margin: 7px 5px;
-}
-
 .post-action-list {
   display: flex;
   justify-content: flex-start;

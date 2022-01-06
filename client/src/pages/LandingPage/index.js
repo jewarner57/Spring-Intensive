@@ -61,7 +61,7 @@ export default function LandingPage() {
         {hasMore ?
           <LoadingCircle />
           :
-          <div class="caughtup-container">
+          <div className="caughtup-container">
             <img className="caughtup-img" src={caughtUp} alt="person resting" />
           </div>
         }

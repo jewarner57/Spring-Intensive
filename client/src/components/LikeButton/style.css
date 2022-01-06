@@ -1,0 +1,10 @@
+.post-action {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 7px;
+}
+
+.post-action > p {
+  margin: 7px 5px;
+  color: white;
+}
