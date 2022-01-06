@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router';
+import logo from '../../images/logo.png'
 import './style.css';
 
 export default function Header() {
@@ -11,7 +12,7 @@ export default function Header() {
     <div>
       <div className="navbar">
         <div className="navbrand">
-          <a href="/#/" className="navlink"><div className="branding"><span>i</span>nmige</div></a>
+          <a href="/#/" className="navlink"><img className="branding-logo" src={logo} alt="inmige logo" /></a>
           {currentUser ?
             <a href="/#/newpost" className="navlink"><div className="button-primary">New Post</div></a>
             : ''

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 .navbar {
   width: 100%;
@@ -24,6 +24,10 @@
 .branding {
   font-size: 1.7em;
   margin-right: 20px;
+}
+
+.branding-logo {
+  max-height: 70px;
 }
 
 .navbrand {
