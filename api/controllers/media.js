@@ -4,8 +4,8 @@ const Like = require('../models/like')
 // SAVE MEDIA
 exports.savemedia = async (req, res) => {
   // Send a relevant error if no hash is provided
-  if (!req.body.title) { return res.status(409).send({ msg: 'Missing title' }) }
-  if (!req.body.location) { return res.status(409).send({ msg: 'No media location provided' }) }
+  if (!req.body.title) { return res.status(400).send({ msg: 'Missing title' }) }
+  if (!req.body.location) { return res.status(400).send({ msg: 'No media location provided' }) }
 
   // create the media
   const newmedia = new Media({
@@ -24,7 +24,7 @@ exports.savemedia = async (req, res) => {
     const media = await newmedia.save()
     res.send({ msg: 'Media Saved Successfully', hash: media.location, id: media._id })
   } catch (err) {
-    res.status(400).send({ msg: 'Media could not be saved', hash: '', err })
+    res.status(500).send({ msg: 'Media could not be saved', hash: '', err })
   }
 }
 
@@ -71,14 +71,14 @@ exports.getmedia = async (req, res) => {
     if (start > media.length) { return res.send({ media: [] }) }
     res.send({ media: mediaArr })
   } catch (err) {
-    res.status(400).send({ msg: 'Unable to get posts', err })
+    res.status(500).send({ msg: 'Unable to get posts', err })
   }
 }
 
 // LIKE A POST
 exports.likeMedia = async (req, res) => {
   const mediaID = req.body.post_id
-  if (!mediaID) { return res.status(409).send({ msg: 'Missing Post ID' }) }
+  if (!mediaID) { return res.status(400).send({ msg: 'Missing Post ID' }) }
 
 
   // If a like already exists then remove it
@@ -89,7 +89,7 @@ exports.likeMedia = async (req, res) => {
       await Media.findOneAndUpdate({ _id: mediaID }, { $inc: { likes: -1 } })
       return res.send({ liked: false })
     } catch (err) {
-      return res.status(401).send({ msg: 'Could not remove like.' })
+      return res.status(500).send({ msg: 'Could not remove like.' })
     }
   }
 
@@ -100,14 +100,14 @@ exports.likeMedia = async (req, res) => {
     await Media.findOneAndUpdate({ _id: mediaID }, { $inc: { likes: 1 } })
     return res.send({ liked: true })
   } catch (err) {
-    return res.status(401).send({ msg: 'Could not like post.' })
+    return res.status(500).send({ msg: 'Could not like post.' })
   }
 }
 
 // Is a post liked by the current user
 exports.isLiked = async (req, res) => {
   const mediaId = req.body.post_id
-  if (!mediaId) { return res.status(409).send({ msg: 'Missing Post ID' }) }
+  if (!mediaId) { return res.status(400).send({ msg: 'Missing Post ID' }) }
   const userId = req.user._id
 
   const isLiked = await Like.findOne({ user: userId, media: mediaId })

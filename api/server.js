@@ -8,6 +8,7 @@ const cors = require('cors')
 
 const authRoutes = require('./routes/auth')
 const mediaRoutes = require('./routes/media')
+const commentRoutes = require('./routes/comment')
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors({ origin: true, credentials: true }))
 // Routes
 app.use('/user', authRoutes)
 app.use('/media', mediaRoutes)
+app.use('/comment', commentRoutes)
 
 // Start the server
 app.listen(process.env.PORT, () => {

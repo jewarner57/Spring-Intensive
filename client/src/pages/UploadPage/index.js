@@ -13,7 +13,7 @@ export default function UploadPage() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const client = create('https://ipfs.infura.io:5001/api/v0')
-  const { currentUser } = useAuth()
+  const { currentUser, clearUser } = useAuth()
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
@@ -41,6 +41,11 @@ export default function UploadPage() {
         body: JSON.stringify({ title, location })
       });
       const content = await rawResponse.json();
+
+      if (rawResponse.status === 401) {
+        clearUser()
+        navigate('/#/signin')
+      }
 
       // If the response is not 200 throw an error
       if (rawResponse.status !== 200) {
