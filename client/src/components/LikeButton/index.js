@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import './style.css';
 
-export default function PostCard(props) {
+export default function LikeButton(props) {
   const { post } = props
   const { clearUser, currentUser } = useAuth()
   const navigate = useNavigate()

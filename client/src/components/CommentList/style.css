@@ -1,8 +1,16 @@
 .comment-title {
-  margin: 10px 0;
+  margin: 10px 10px 10px 20px;
 }
 
 .comment-scroll-container {
   overflow: scroll;
   max-height: 350px;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.comment-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

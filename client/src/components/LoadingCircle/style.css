@@ -7,10 +7,10 @@
   margin: 50px auto;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
-  animation-name: rotate;
+  animation-name: rotateLoadingWheel;
 }
 
-@keyframes rotate {
+@keyframes rotateLoadingWheel {
   0% {
     transform: rotate(70deg);
   }

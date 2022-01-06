@@ -43,7 +43,6 @@ export default function ViewPost() {
       }
       // set the content and leave loading state
       setPostContent(content.media)
-      console.log(content.media)
       setLoading(false)
     }
     catch (err) {
@@ -74,7 +73,7 @@ export default function ViewPost() {
                       <p className="post-content-date">{new ED(postContent.createdAt).format('%b %m, %Y')}</p>
                     </div>
                   </a>
-                  <CommentList postID={postContent._id} commentCount={postContent.comments} />
+                  <CommentList post={postContent} commentCount={postContent.comments} />
                 </div>
               </div>
             </div>

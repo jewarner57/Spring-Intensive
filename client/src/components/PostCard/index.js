@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import LikeButton from '../LikeButton'
 import { useNavigate } from 'react-router-dom';
 import './style.css';

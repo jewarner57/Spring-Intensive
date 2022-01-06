@@ -17,7 +17,10 @@ exports.createComment = async (req, res) => {
   try {
     await newComment.save()
     await Media.findOneAndUpdate({ _id: postId }, { $inc: { comments: 1 } })
-    return res.send({ comment: newComment })
+    // Get the comment again so we can populat the user
+    const comment = await Comment.findOne({ _id: newComment._id }).populate('user', 'username')
+
+    return res.send({ comment })
   } catch (err) {
     return res.status(500).send({ msg: 'Could not create comment', err })
   }

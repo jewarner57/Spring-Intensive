@@ -8,10 +8,10 @@ export default function Comment(props) {
     <div className="comment">
       <div className="comment-poster-info">
         <div className="comment-pfp">
-          <a class="no-style-link" href={`/#/profile/${comment.user._id}`} >{comment.user.username[0].toUpperCase()}</a>
+          <a className="no-style-link" href={`/#/profile/${comment.user._id}`} >{comment.user.username[0].toUpperCase()}</a>
         </div>
         <div>
-          <a class="no-style-link" href={`/#/profile/${comment.user._id}`} >
+          <a className="no-style-link" href={`/#/profile/${comment.user._id}`} >
             <b>{comment.user.username[0].toUpperCase() + comment.user.username.slice(1,)
             }</b></a> - {
             new ED(new ED()).when(new ED(comment.createdAt))
