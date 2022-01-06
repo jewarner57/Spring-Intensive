@@ -50,9 +50,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  animation: rotate 1s linear infinite;
 }
 
-.upload-target-animate > p {
+.upload-target-animate > p, .upload-target-animate > svg {
   transition: all 0.5s;
   transform: rotate(180deg);
   opacity: 0;
@@ -61,5 +63,14 @@
 .upload-target > p {
   transition: all 0.2s;
   color: rgba(255, 255, 255, 0.671);
-   font-family: 'Fredoka One', cursive;
+  font-family: 'Fredoka One', cursive;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(20deg)
+  }
 }

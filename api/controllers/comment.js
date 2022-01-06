@@ -7,8 +7,9 @@ exports.createComment = async (req, res) => {
   const postId = req.body.post_id
   if (!postId) { return res.status(401).send({ msg: 'Missing Post ID' }) }
 
-  const { content } = req.body
+  let { content } = req.body
   if (!content) { return res.status(401).send({ msg: 'Comments cannot be blank' }) }
+  content = String(content)
 
   // Create a new like for this post
   const newComment = new Comment({ user: userId, media: postId, content })

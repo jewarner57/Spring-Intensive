@@ -84,7 +84,7 @@ export default function UploadPage() {
   return (
     <div className="upload-page">
       <div className="upload-container">
-        <ImageDropzone setImage={setFile} />
+        <ImageDropzone image={file} setImage={setFile} />
         <div className="upload-form">
           <h2 className="upload-title">Upload Photos</h2>
           <UploadForm
