@@ -1,4 +1,5 @@
 const Comment = require('../models/comment')
+const Media = require('../models/media')
 
 // CREATE A COMMENT
 exports.createComment = async (req, res) => {
@@ -15,6 +16,7 @@ exports.createComment = async (req, res) => {
   const newComment = new Comment({ user: userId, media: postId, content })
   try {
     await newComment.save()
+    await Media.findOneAndUpdate({ _id: postId }, { $inc: { comments: 1 } })
     return res.send({ comment: newComment })
   } catch (err) {
     return res.status(500).send({ msg: 'Could not create comment', err })
@@ -28,7 +30,7 @@ exports.getCommentsForPost = async (req, res) => {
   const userId = req.user._id
 
   try {
-    const comments = await Comment.find({ media: mediaId, user: userId })
+    const comments = await Comment.find({ media: mediaId, user: userId }).populate('user', 'username')
     return res.send({ comments })
   } catch (err) {
     return res.status(500).send({ msg: 'Could not get post comments', err })

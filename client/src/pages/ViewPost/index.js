@@ -5,6 +5,7 @@ import Error404Page from '../Error404Page';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import CommentList from '../../components/CommentList';
 
 export default function ViewPost() {
   const [loading, setLoading] = useState(true)
@@ -40,7 +41,8 @@ export default function ViewPost() {
         setError(<Error404Page />)
       }
       // set the content and leave loading state
-      setPostContent(content)
+      setPostContent(content.media)
+      console.log(content.media)
       setLoading(false)
     }
     catch (err) {
@@ -80,6 +82,7 @@ export default function ViewPost() {
                       <p className="post-content-date">{formatDate(new Date(postContent.createdAt))}</p>
                     </div>
                   </a>
+                  <CommentList postID={postContent._id} commentCount={postContent.comments} />
                 </div>
               </div>
             </div>

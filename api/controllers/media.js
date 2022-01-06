@@ -36,10 +36,7 @@ exports.getmediabyid = async (req, res) => {
     const media = await Media.findOne({ _id: mediaID }).populate('author', 'username')
     if (media) {
       res.send({
-        location: media.location,
-        title: media.title,
-        author: media.author,
-        createdAt: media.createdAt,
+        media
       })
     }
   } catch (err) {

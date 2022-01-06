@@ -1,0 +1,8 @@
+.comment-title {
+  margin: 10px 0;
+}
+
+.comment-scroll-container {
+  overflow: scroll;
+  max-height: 350px;
+}

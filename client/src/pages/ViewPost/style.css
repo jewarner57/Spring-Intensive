@@ -62,7 +62,6 @@
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--bg-primary-dark);
   color: white;
   text-decoration: none;
 }

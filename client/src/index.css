@@ -6,9 +6,11 @@
   --bg-secondary-dark: #242f40c5;
   --teal-dark: #23685c;
   --teal-primary: #508484;
-  --teal-secondary: #79C99E;
+  --teal-secondary: #70be95;
   --green-secondary: #97DB4F;
 }
+
+/* 79C99E */
 
 body {
   margin: 0;

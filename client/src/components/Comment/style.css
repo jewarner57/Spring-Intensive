@@ -1,0 +1,26 @@
+.comment-pfp {
+  padding: 5px 10px;
+  background-color: var(--teal-secondary);
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.comment-poster-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.comment-text {
+  word-wrap: break-word;
+}
+
+.comment {
+  padding-top: 5px;
+  border-top: 2px solid var(--bg-primary-dark);
+}
+
+.no-style-link {
+  text-decoration: none;
+  color: white;
+}
