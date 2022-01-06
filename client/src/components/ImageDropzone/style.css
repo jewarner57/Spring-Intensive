@@ -6,6 +6,7 @@
   grid-template-rows: 1fr 1fr;
   justify-items: center;
   align-content: center;
+  z-index: 0;
 }
 
 .upload-image {
@@ -16,23 +17,49 @@
 }
 
 .upload-target {
+  transition: all 0.2s;
   width: 150px;
   height: 150px;
   
   background: none;
-  border: 4px dashed rgba(0, 0, 0, 0.616);
+  border: 4px dashed rgba(204, 204, 204, 0.671);;
   border-radius: 50%;
 
   grid-area: 1 / 1 / 2 / 2;
   margin-top: 270px;
-  margin-left: 30px;
+  margin-left: 32px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.upload-target-animate {
+  transition: all 0.2s;
+  width: 415px;
+  height: 415px;
+
+  background: none;
+  border: 4px dashed rgba(255, 255, 255, 0.671);
+  border-radius: 50%;
+
+  grid-area: 1 / 1 / 2 / 2;
+  margin-top: 136px;
+  margin-left: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-target-animate > p {
+  transition: all 0.5s;
+  transform: rotate(180deg);
+  opacity: 0;
+}
+
 .upload-target > p {
-  color: rgba(0, 0, 0, 0.486);
+  transition: all 0.2s;
+  color: rgba(255, 255, 255, 0.671);
    font-family: 'Fredoka One', cursive;
 }
