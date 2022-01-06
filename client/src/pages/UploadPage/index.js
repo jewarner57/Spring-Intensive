@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthForm from '../../components/AuthForm';
 import { useAuth } from '../../contexts/AuthContext';
 import { create } from 'ipfs-http-client'
+import imageUpload from '../../images/image-upload.svg'
 
 export default function UploadPage() {
   const [title, setTitle] = useState()
@@ -79,9 +80,11 @@ export default function UploadPage() {
   return (
     <div className="upload-page">
       <div className="upload-container">
-
+        <div className="upload-drop-container">
+          <img className="upload-image" src={imageUpload} alt="person standing next to black hole" />
+        </div>
         <div className="upload-form">
-          <h2 className="upload-title">New Post</h2>
+          <h2 className="upload-title">Upload Photos</h2>
           <AuthForm
             error={error}
             loading={loading}
