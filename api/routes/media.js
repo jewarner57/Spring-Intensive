@@ -10,5 +10,6 @@ router.get('/get/:id', isAuth, mediaController.getmediabyid)
 router.get('/get/user/:id', isAuth, mediaController.getusermedia)
 router.get('/get/:start/:end', mediaController.getmedia)
 router.post('/like', isAuth, mediaController.likeMedia)
+router.post('/isliked', isAuth, mediaController.isLiked)
 
 module.exports = router

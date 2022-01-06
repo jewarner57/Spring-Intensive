@@ -53,6 +53,7 @@ exports.getusermedia = async (req, res) => {
 
   try {
     const media = await Media.find({ author: mediaID }).populate('author', 'username')
+
     res.send({ media })
   } catch (err) {
     res.status(404).send({ msg: 'Unable to find user\'s posts.', err })
@@ -76,25 +77,39 @@ exports.getmedia = async (req, res) => {
 
 // LIKE A POST
 exports.likeMedia = async (req, res) => {
-  if (!req.body.post_id) { return res.status(409).send({ msg: 'Missing Post ID' }) }
+  const mediaID = req.body.post_id
+  if (!mediaID) { return res.status(409).send({ msg: 'Missing Post ID' }) }
+
 
   // If a like already exists then remove it
-  const likeExists = await Like.findOne({ user: req.user._id, media: req.body.post_id })
+  const likeExists = await Like.findOne({ user: req.user._id, media: mediaID })
   if (likeExists) {
     try {
-      await Like.deleteOne({ user: req.user._id, media: req.body.post_id })
-      return res.send({ msg: 'like removed' })
+      await Like.deleteOne({ user: req.user._id, media: mediaID })
+      await Media.findOneAndUpdate({ _id: mediaID }, { $inc: { likes: -1 } })
+      return res.send({ liked: false })
     } catch (err) {
       return res.status(401).send({ msg: 'Could not remove like.' })
     }
   }
 
   // Create a new like for this post
-  const newLike = new Like({ user: req.user._id, media: req.body.post_id })
+  const newLike = new Like({ user: req.user._id, media: mediaID })
   try {
     await newLike.save()
-    return res.send({ msg: 'post liked' })
+    await Media.findOneAndUpdate({ _id: mediaID }, { $inc: { likes: 1 } })
+    return res.send({ liked: true })
   } catch (err) {
     return res.status(401).send({ msg: 'Could not like post.' })
   }
+}
+
+// Is a post liked by the current user
+exports.isLiked = async (req, res) => {
+  const mediaId = req.body.post_id
+  if (!mediaId) { return res.status(409).send({ msg: 'Missing Post ID' }) }
+  const userId = req.user._id
+
+  const isLiked = await Like.findOne({ user: userId, media: mediaId })
+  res.send({ liked: Boolean(isLiked) })
 }
