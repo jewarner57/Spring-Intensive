@@ -1,5 +1,6 @@
 import Comment from '../Comment';
 import LoadingCircle from '../LoadingCircle';
+import CommentForm from '../CommentForm';
 import { useEffect, useState } from 'react';
 import './style.css';
 
@@ -42,6 +43,7 @@ export default function CommentList(props) {
     <div className="comment-section">
       <p className="comment-title">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}:</p>
       <div className="comment-scroll-container">
+        {error ? <p class="error-text">{error}</p> : ''}
         {loading ?
           <LoadingCircle />
           :
@@ -50,6 +52,7 @@ export default function CommentList(props) {
           })
         }
       </div>
+      <CommentForm />
     </div>
   );
 }

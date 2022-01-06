@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import CommentList from '../../components/CommentList';
+import ED from '@jewarner57/easydate'
 
 export default function ViewPost() {
   const [loading, setLoading] = useState(true)
@@ -51,15 +52,6 @@ export default function ViewPost() {
     }
   }
 
-  const formatDate = (date) => {
-    // Short Month, Date Fullyear
-    const month = date.toLocaleString('en-US', { month: 'short' })
-    const day = date.getDate()
-    const year = date.getFullYear()
-
-    return `${month} ${day}, ${year}`
-  }
-
   return (
     <React.Fragment>
       {error ? error :
@@ -79,7 +71,7 @@ export default function ViewPost() {
                     </div>
                     <div className="post-header-info">
                       <p className="post-content-header">{postContent.author.username[0].toUpperCase() + postContent.author.username.slice(1)}</p>
-                      <p className="post-content-date">{formatDate(new Date(postContent.createdAt))}</p>
+                      <p className="post-content-date">{new ED(postContent.createdAt).format('%b %m, %Y')}</p>
                     </div>
                   </a>
                   <CommentList postID={postContent._id} commentCount={postContent.comments} />

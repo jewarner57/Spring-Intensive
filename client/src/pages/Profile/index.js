@@ -5,6 +5,7 @@ import PostList from '../../components/PostList';
 import Error404Page from '../Error404Page'
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import ED from '@jewarner57/easydate'
 import './style.css';
 
 export default function Profile() {
@@ -53,15 +54,6 @@ export default function Profile() {
     }
   }
 
-  const formatDate = (date) => {
-    // Short Month, Date Fullyear
-    const month = date.toLocaleString('en-US', { month: 'short' })
-    const day = date.getDate()
-    const year = date.getFullYear()
-
-    return `${month} ${day}, ${year}`
-  }
-
   return (
     <React.Fragment>
       {error ? error :
@@ -81,7 +73,7 @@ export default function Profile() {
                   <p className="pf-username">{userContent.username[0].toUpperCase() + userContent.username.slice(1)}</p>
                   <div>
                     <p className="user-info-item"><span>{userPosts.length}</span> Posts</p>
-                    <p className="user-info-item">Joined: <span>{formatDate(new Date(userContent.createdAt))}</span></p>
+                    <p className="user-info-item">Joined: <span>{new ED(userContent.createdAt).format('%b %m, %Y')}</span></p>
                   </div>
                 </div>
 
