@@ -13,10 +13,8 @@ export default function AuthForm(props) {
               id={field.id}
               type={field.type}
               className="form-field"
-              val={field.val}
-              onChange={(e) => {
-                field.type === 'file' ? field.setVal(e.target.files[0]) : field.setVal(e.target.value)
-              }}
+              value={field.val}
+              onChange={(e) => field.setVal(e.target.value)}
               required={field.required}
             />
           </React.Fragment>

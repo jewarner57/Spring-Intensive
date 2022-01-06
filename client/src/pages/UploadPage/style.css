@@ -25,21 +25,9 @@
 
 .upload-title {
   color: white;
-  font-family: 'Fredoka One', cursive;;
+  font-family: 'Fredoka One', cursive;
 }
 
 .upload-form > form > label {
   color: white;
-}
-
-.upload-drop-container {
-  background-color: var(--teal-primary);
-  width: 60%;
-}
-
-.upload-image {
-  position: relative;
-  bottom: -50px;
-  left: -100px;
-  width: 550px;
 }

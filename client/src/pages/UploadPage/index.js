@@ -1,14 +1,14 @@
 import './style.css';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import AuthForm from '../../components/AuthForm';
 import { useAuth } from '../../contexts/AuthContext';
 import { create } from 'ipfs-http-client'
-import imageUpload from '../../images/image-upload.svg'
+import ImageDropzone from '../../components/ImageDropzone';
+import UploadForm from '../../components/UploadForm';
 
 export default function UploadPage() {
-  const [title, setTitle] = useState()
-  const [file, setFile] = useState()
+  const [title, setTitle] = useState('')
+  const [file, setFile] = useState('')
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -16,12 +16,11 @@ export default function UploadPage() {
   const { currentUser } = useAuth()
 
   const handleFormSubmit = async (e) => {
-    if (!currentUser) {
-      navigate('/signin')
-      return
-    }
-
     e.preventDefault()
+
+    if (!currentUser) { navigate('/signin'); return }
+    if (title === '') { setError('Please enter a title'); return }
+    if (file === '') { setError('No image selected'); return }
 
     setLoading(true)
     const location = await uploadFileToIPFS()
@@ -80,24 +79,22 @@ export default function UploadPage() {
   return (
     <div className="upload-page">
       <div className="upload-container">
-        <div className="upload-drop-container">
-          <img className="upload-image" src={imageUpload} alt="person standing next to black hole" />
-        </div>
+        <ImageDropzone image={file} setImage={setFile} />
         <div className="upload-form">
           <h2 className="upload-title">Upload Photos</h2>
-          <AuthForm
+          <UploadForm
             error={error}
             loading={loading}
             submitText="CREATE POST"
             handleFormSubmit={handleFormSubmit}
             fields={[
               {
-                id: "title", label: 'Title', required: true, type: 'text',
-                val: { title }, setVal: setTitle
+                id: "title", label: 'Title', required: false, type: 'text',
+                val: title, setVal: setTitle
               },
               {
-                id: "file", label: 'Image', required: true, type: 'file',
-                val: { file }, setVal: setFile
+                id: "file", label: 'Image', required: false, type: 'file',
+                val: file.name, setVal: setFile
               }
             ]}
           />

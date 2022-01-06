@@ -39,7 +39,7 @@ label {
 
 .submit-button:hover {
   transition: all 0.2s;
-  opacity: 0.9;
+  opacity: 0.8;
   box-shadow: none;
 }
 
@@ -51,5 +51,26 @@ button[disabled]{
 
 .error-text {
   word-wrap: break-word;
-  color: tomato
+  color: tomato;
+  margin-bottom: 0;
+}
+
+.file-field {
+  display: none;
+}
+
+.file-upload-button {
+  padding: 15px;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin: 5px 0; 
+  transition: opacity 0.2s;
+  background-color: white;
+  cursor: pointer;
+  color: gray;
+}
+
+.file-upload-button:hover {
+  transition: opacity 0.2s;
+  opacity: 0.8;
 }

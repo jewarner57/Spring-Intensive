@@ -1,0 +1,38 @@
+.upload-drop-container {
+  background-color: var(--teal-primary);
+  min-width: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-content: center;
+}
+
+.upload-image {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 550px;
+  margin-left: -100px;
+  margin-top: 140px;
+}
+
+.upload-target {
+  width: 150px;
+  height: 150px;
+  
+  background: none;
+  border: 4px dashed rgba(0, 0, 0, 0.616);
+  border-radius: 50%;
+
+  grid-area: 1 / 1 / 2 / 2;
+  margin-top: 270px;
+  margin-left: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-target > p {
+  color: rgba(0, 0, 0, 0.486);
+   font-family: 'Fredoka One', cursive;
+}
