@@ -15,7 +15,9 @@ export default function Comment(props) {
           <Link className="no-style-link" to={`/profile/${comment.user._id}`} >
             <b>{comment.user.username[0].toUpperCase() + comment.user.username.slice(1,)
             }</b></Link> - {
-            new ED(new ED()).when(new ED(comment.createdAt))
+            // this ternary is here because the library parses the when of a date that is zero seconds ago as 
+            // < one min from now which doesn't make a lot of sense.
+            new ED(new ED()).when(new ED(comment.createdAt)) === 'Less than one minute from now' ? 'just now' : new ED(new ED()).when(new ED(comment.createdAt))
           }
         </div>
       </div>
