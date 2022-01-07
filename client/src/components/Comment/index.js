@@ -1,5 +1,6 @@
 import './style.css';
 import ED from '@jewarner57/easydate'
+import { Link } from 'react-router-dom'
 
 export default function Comment(props) {
   const { comment } = props
@@ -8,12 +9,12 @@ export default function Comment(props) {
     <div className="comment">
       <div className="comment-poster-info">
         <div className="comment-pfp">
-          <a className="no-style-link" href={`/#/profile/${comment.user._id}`} >{comment.user.username[0].toUpperCase()}</a>
+          <Link className="no-style-link" to={`/#/profile/${comment.user._id}`} >{comment.user.username[0].toUpperCase()}</Link>
         </div>
         <div>
-          <a className="no-style-link" href={`/#/profile/${comment.user._id}`} >
+          <Link className="no-style-link" to={`/#/profile/${comment.user._id}`} >
             <b>{comment.user.username[0].toUpperCase() + comment.user.username.slice(1,)
-            }</b></a> - {
+            }</b></Link> - {
             new ED(new ED()).when(new ED(comment.createdAt))
           }
         </div>
