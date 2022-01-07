@@ -27,7 +27,8 @@
 - Check out the live project deployed at: [www.jonathanewarner.com/inmige/](https://www.jonathanewarner.com/inmige/)
 
 ##  <a name='Screenshotsofapp'></a>Screenshots of app
-
+![upload page](./client/src/images/app-profile-screenshot.png)
+![upload page](./client/src/images/app-upload-screenshot.png)
 
 ##  <a name='Technologiesused'></a>Technologies used
 - inmige is built on Mongodb, Express, React, Node.js, (MERN stack). Image storage for the app is powered by the interplanetary file system [IPFS](https://ipfs.io/)

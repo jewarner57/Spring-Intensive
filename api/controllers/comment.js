@@ -30,7 +30,6 @@ exports.createComment = async (req, res) => {
 exports.getCommentsForPost = async (req, res) => {
   const mediaId = req.params.id
   if (!mediaId) { return res.status(409).send({ msg: 'Missing Post ID' }) }
-  const userId = req.user._id
 
   try {
     const comments = await Comment.find({ media: mediaId }).populate('user', 'username')
