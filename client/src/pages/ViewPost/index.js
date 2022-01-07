@@ -69,7 +69,7 @@ export default function ViewPost() {
                     </div>
                     <div className="post-header-info">
                       <p className="post-content-header">{postContent.author.username[0].toUpperCase() + postContent.author.username.slice(1)}</p>
-                      <p className="post-content-date">{new ED(postContent.createdAt).format('%b %m, %Y')}</p>
+                      <p className="post-content-date">{new ED(postContent.createdAt).format("%b %d, %Y")}</p>
                     </div>
                   </Link>
                   <CommentList post={postContent} commentCount={postContent.comments} />

@@ -73,7 +73,7 @@ export default function Profile() {
                   <p className="pf-username">{userContent.username[0].toUpperCase() + userContent.username.slice(1)}</p>
                   <div>
                     <p className="user-info-item"><span>{userPosts.length}</span> Posts</p>
-                    <p className="user-info-item">Joined: <span>{new ED(userContent.createdAt).format('%b %m, %Y')}</span></p>
+                    <p className="user-info-item">Joined: <span>{new ED(userContent.createdAt).format('%b %d, %Y')}</span></p>
                   </div>
                 </div>
 

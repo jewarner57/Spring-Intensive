@@ -43,12 +43,12 @@ export default function CommentList(props) {
   return (
     <div>
       <div className="comment-section">
-        <div class="comment-list-header">
+        <div className="comment-list-header">
           <p className="comment-title">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}:</p>
           <LikeButton post={post} />
         </div>
         <div className="comment-scroll-container">
-          {error ? <p class="error-text">{error}</p> : ''}
+          {error ? <p className="error-text">{error}</p> : ''}
           {loading ?
             <LoadingCircle />
             :
