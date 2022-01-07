@@ -15,7 +15,24 @@ export default function UploadPage() {
   const client = create('https://ipfs.infura.io:5001/api/v0')
   const { currentUser, clearUser } = useAuth()
 
+  const setFileToUpload = (upload) => {
+    setError()
+    // is the file a valid upload?
+    if (!isValidUploadFile(upload)) {
+      // show an error
+      setError('Please select an image.')
+      return
+    }
+    setFile(upload)
+  }
+
+  const isValidUploadFile = (upload) => {
+    // is the file an image
+    return (upload['type'].split('/')[0] === 'image')
+  }
+
   const handleFormSubmit = async (e) => {
+    setError()
     e.preventDefault()
 
     if (!currentUser) { navigate('/signin'); return }
@@ -64,11 +81,11 @@ export default function UploadPage() {
   }
 
   const uploadFileToIPFS = async () => {
-    const upload = file
-    // if the file isn't an image
-    if (upload['type'].split('/')[0] !== 'image') {
-      // set error
-      setError('Please upload an image')
+    setError()
+    // if the file isn't a valid upload
+    if (!isValidUploadFile(file)) {
+      // show an error
+      setError('Please select an image.')
       return false
     }
 
@@ -84,7 +101,7 @@ export default function UploadPage() {
   return (
     <div className="upload-page">
       <div className="upload-container">
-        <ImageDropzone image={file} setImage={setFile} />
+        <ImageDropzone image={file} setImage={setFileToUpload} />
         <div className="upload-form">
           <h2 className="upload-title">Upload Photos</h2>
           <UploadForm
@@ -99,7 +116,7 @@ export default function UploadPage() {
               },
               {
                 id: "file", label: 'Image', required: false, type: 'file',
-                val: file.name, setVal: setFile
+                val: file.name, setVal: setFileToUpload
               }
             ]}
           />
