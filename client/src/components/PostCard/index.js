@@ -1,5 +1,5 @@
 import LikeButton from '../LikeButton'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 export default function PostCard(props) {
@@ -15,7 +15,7 @@ export default function PostCard(props) {
 
   return (
     <div className="card-wrapper" >
-      <a href={`/#/post/${post._id}`} className="post-detail-link">
+      <Link to={`/post/${post._id}`} className="post-detail-link">
         <div className="card-content">
           <div className="image-container">
             <img className="card-image" src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} alt="post content" />
@@ -24,7 +24,7 @@ export default function PostCard(props) {
             <p>{shortenTitle(post.title)}</p>
           </div>
         </div>
-      </a>
+      </Link>
       <div className="post-action-list">
         <LikeButton post={post} />
         <div className="post-action" onClick={() => { navigate(`/post/${post._id}`) }}>

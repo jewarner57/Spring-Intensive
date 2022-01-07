@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
 import Error404Page from '../Error404Page';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import './style.css';
 import CommentList from '../../components/CommentList';
 import ED from '@jewarner57/easydate'
@@ -34,7 +33,7 @@ export default function ViewPost() {
 
       if (res.status === 401) {
         clearUser()
-        navigate('/#/signin')
+        navigate('/signin')
       }
 
       // If the response is not 200 throw an error
@@ -64,7 +63,7 @@ export default function ViewPost() {
                   <img src={`${process.env.REACT_APP_IPFS_READ_URL}${postContent.location}`} alt="Post Media" />
                 </div>
                 <div className="post-content">
-                  <a className="post-header" href={`/#/profile/${postContent.author._id}`}>
+                  <Link className="post-header" to={`/profile/${postContent.author._id}`}>
                     <div className="button-primary">
                       {postContent.author.username[0].toUpperCase()}
                     </div>
@@ -72,7 +71,7 @@ export default function ViewPost() {
                       <p className="post-content-header">{postContent.author.username[0].toUpperCase() + postContent.author.username.slice(1)}</p>
                       <p className="post-content-date">{new ED(postContent.createdAt).format('%b %m, %Y')}</p>
                     </div>
-                  </a>
+                  </Link>
                   <CommentList post={postContent} commentCount={postContent.comments} />
                 </div>
               </div>

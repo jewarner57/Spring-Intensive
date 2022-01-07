@@ -17,7 +17,7 @@ export default function App() {
     <AuthProvider>
       <HashRouter>
         <Header></Header>
-        <Routes>
+        <Routes basename="inmige/">
 
           <Route exact path="/" element={<LandingPage />} />
 

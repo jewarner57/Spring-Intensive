@@ -44,7 +44,7 @@ export default function UploadPage() {
 
       if (rawResponse.status === 401) {
         clearUser()
-        navigate('/#/signin')
+        navigate('/signin')
       }
 
       // If the response is not 200 throw an error
