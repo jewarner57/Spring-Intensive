@@ -1,5 +1,4 @@
-# View-Finder
-
-> Decentralized Image Sharing
+# inmige api
+> Decentralized Image Hosting and Sharing
 
 

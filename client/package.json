@@ -19,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "predeploy": "env-cmd -f .env.production npm run build",
+    "predeploy": "env-cmd -f .env.production.local npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
