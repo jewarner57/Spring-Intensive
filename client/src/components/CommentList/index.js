@@ -44,9 +44,10 @@ export default function CommentList(props) {
     <div>
       <div className="comment-section">
         <div className="comment-list-header">
-          <p className="comment-title">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}:</p>
           <LikeButton post={post} />
+          <p className="comment-title">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}:</p>
         </div>
+        <CommentForm postID={post._id} setComments={setComments} />
         <div className="comment-scroll-container">
           {error ? <p className="error-text">{error}</p> : ''}
           {loading ?
@@ -58,7 +59,6 @@ export default function CommentList(props) {
           }
         </div>
       </div>
-      <CommentForm postID={post._id} setComments={setComments} />
     </div>
   );
 }

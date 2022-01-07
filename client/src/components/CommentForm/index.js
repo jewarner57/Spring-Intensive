@@ -45,7 +45,7 @@ export default function CommentForm(props) {
   return (
     <div className="comment-form-section">
       <form className="comment-form" onSubmit={createComment}>
-        <input type="text" name="comment" id="comment-input" placeholder="Tell 'em what you think."
+        <input type="text" name="comment" id="comment-input" placeholder="Tell 'em what yah think."
           value={commentText} onChange={(e) => setCommentText(e.target.value)} required />
       </form>
     </div>

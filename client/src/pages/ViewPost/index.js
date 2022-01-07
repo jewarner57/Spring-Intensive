@@ -57,23 +57,21 @@ export default function ViewPost() {
           {loading ?
             <LoadingCircle />
             :
-            <div>
-              <div className="post-card">
-                <div className="post-image-wrapper">
-                  <img src={`${process.env.REACT_APP_IPFS_READ_URL}${postContent.location}`} alt="Post Media" />
+            <div className="post-card">
+              <Link className="post-header" to={`/profile/${postContent.author._id}`}>
+                <div className="button-primary">
+                  {postContent.author.username[0].toUpperCase()}
                 </div>
-                <div className="post-content">
-                  <Link className="post-header" to={`/profile/${postContent.author._id}`}>
-                    <div className="button-primary">
-                      {postContent.author.username[0].toUpperCase()}
-                    </div>
-                    <div className="post-header-info">
-                      <p className="post-content-header">{postContent.author.username[0].toUpperCase() + postContent.author.username.slice(1)}</p>
-                      <p className="post-content-date">{new ED(postContent.createdAt).format("%b %d, %Y")}</p>
-                    </div>
-                  </Link>
-                  <CommentList post={postContent} commentCount={postContent.comments} />
+                <div className="post-header-info">
+                  <p className="post-content-header">{postContent.author.username[0].toUpperCase() + postContent.author.username.slice(1)}</p>
+                  <p className="post-content-date">{new ED(postContent.createdAt).format("%b %d, %Y")}</p>
                 </div>
+              </Link>
+              <div className="post-image-wrapper">
+                <img src={`${process.env.REACT_APP_IPFS_READ_URL}${postContent.location}`} alt="Post Media" />
+              </div>
+              <div className="post-content">
+                <CommentList post={postContent} commentCount={postContent.comments} />
               </div>
             </div>
           }
