@@ -33,7 +33,7 @@ exports.getCommentsForPost = async (req, res) => {
   const userId = req.user._id
 
   try {
-    const comments = await Comment.find({ media: mediaId, user: userId }).populate('user', 'username')
+    const comments = await Comment.find({ media: mediaId }).populate('user', 'username')
     return res.send({ comments })
   } catch (err) {
     return res.status(500).send({ msg: 'Could not get post comments', err })
