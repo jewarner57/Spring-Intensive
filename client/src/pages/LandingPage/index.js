@@ -47,6 +47,7 @@ export default function LandingPage() {
       setLoading(false)
     }
     catch (err) {
+      hasMore(false)
       setLoading(false)
       setError(err.message)
       throw new Error(err.message)
