@@ -6,6 +6,7 @@ export default function ImageDropzone(props) {
 
   const { image, setImage } = props
   const [animateTarget, setAnimateTarget] = useState(false)
+  const [currentDragElem, setCurrentDragElem] = useState()
 
   const dragOver = (e) => {
     e.preventDefault();
@@ -14,12 +15,18 @@ export default function ImageDropzone(props) {
 
   const dragEnter = (e) => {
     e.preventDefault();
+    setCurrentDragElem(e.target)
     setAnimateTarget(true)
   }
 
   const dragLeave = (e) => {
     e.preventDefault();
-    setAnimateTarget(false)
+    // Check if the leave element is the same as the enter element
+    // This will only be true if the cursor is leaving the drag space
+    // This prevents drag leave from triggering on child elements
+    if (e.target === currentDragElem) {
+      setAnimateTarget(false)
+    }
   }
 
   const fileDrop = (e) => {
