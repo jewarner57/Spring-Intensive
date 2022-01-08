@@ -1,7 +1,37 @@
 #comment-input {
-  padding: 20px;
-  width: calc(100% - 40px);
-  font-size: 1.0em;
+  font-size: 1.1em;
   border: none;
   outline: none;
+  padding-left: 20px;
+}
+
+.comment-form {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  grid-template-rows: 50px;
+}
+
+.comment-submit-button {
+  transition: all 0.4s;
+  border: none;
+  background-color: var(--teal-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.comment-submit-button:hover, .comment-submit-button:focus {
+  transition: all 0.4s;
+  outline: none;
+  background-color: var(--teal-primary);
+}
+
+.comment-submit-button:hover > svg, .comment-submit-button:focus > svg {
+  transition: all 0.4s;
+  transform: rotate(90deg);
+}
+
+.comment-submit-button > svg {
+  transition: all 0.4s;
 }

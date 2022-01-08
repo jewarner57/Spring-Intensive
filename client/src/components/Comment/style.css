@@ -17,7 +17,7 @@
 
 .comment {
   padding-top: 5px;
-  border-top: 2px solid var(--bg-primary-dark);
+  border-bottom: 2px solid var(--bg-primary-dark);
 }
 
 .no-style-link {

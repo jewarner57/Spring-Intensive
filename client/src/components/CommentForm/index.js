@@ -47,6 +47,9 @@ export default function CommentForm(props) {
       <form className="comment-form" onSubmit={createComment}>
         <input type="text" name="comment" id="comment-input" placeholder="Tell 'em what yah think."
           value={commentText} onChange={(e) => setCommentText(e.target.value)} required />
+        <button className="comment-submit-button" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z" /></svg>
+        </button>
       </form>
     </div>
   );
