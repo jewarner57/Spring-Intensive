@@ -4,7 +4,6 @@ padding-left: 10px;
 }
 
 .comment-scroll-container {
-  overflow: scroll;
   padding: 20px;
   padding-top: 0;
   display: flex;
