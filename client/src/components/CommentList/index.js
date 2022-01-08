@@ -48,16 +48,20 @@ export default function CommentList(props) {
           <p className="comment-title">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}:</p>
         </div>
         <CommentForm postID={post._id} setComments={setComments} />
-        <div className="comment-scroll-container">
-          {error ? <p className="error-text">{error}</p> : ''}
-          {loading ?
-            <LoadingCircle />
+        {loading ?
+          <LoadingCircle />
+          :
+          comments.length > 0 ?
+            <div className="comment-scroll-container">
+              {error ? <p className="error-text">{error}</p> : ''}
+              {comments.map((comment) => {
+                return <Comment comment={comment} key={comment._id} />
+              })}
+
+            </div>
             :
-            comments.map((comment) => {
-              return <Comment comment={comment} key={comment._id} />
-            })
-          }
-        </div>
+            ''
+        }
       </div>
     </div>
   );
