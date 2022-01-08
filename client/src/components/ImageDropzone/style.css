@@ -55,10 +55,9 @@
   align-items: center;
   justify-content: center;
 
-  animation: rotateDropText 1s linear infinite;
+  animation: rotateDropCircle 1s linear infinite, lowerZindex 0.27s linear;
 
   z-index: 9;
-  animation: lowerZindex 0.27s linear;
 }
 
 .upload-target-animate > p, .upload-target-animate > svg {
@@ -83,7 +82,7 @@
   }
 }
 
-@keyframes rotateDropText {
+@keyframes rotateDropCircle {
   0% {
     transform: rotate(0deg)
   }
