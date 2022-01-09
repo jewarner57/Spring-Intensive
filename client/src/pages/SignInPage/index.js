@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import AuthForm from '../../components/AuthForm';
 import './style.css'
 
@@ -10,6 +10,7 @@ export default function SignupPage(props) {
   const [error, setError] = useState()
   const { login } = useAuth()
   const [loading, setLoading] = useState(false)
+  const location = useLocation()
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
@@ -19,7 +20,10 @@ export default function SignupPage(props) {
     try {
       await login(email, password)
       setLoading(false)
-      navigate('/')
+      // if a from is specified, navigate the user there
+      // from is like a next param, it's set if the user is redirected
+      // to signin from a different page
+      navigate(location?.state?.from ? location.state.from : '/')
     }
     catch (err) {
       setError(err.message)

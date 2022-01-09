@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Error404Page from '../../pages/Error404Page'
 
 const useApi = (url, options = { method: 'GET', credentials: 'include' }) => {
   const { clearUser } = useAuth()
   const navigate = useNavigate()
-  const location = useLocation()
 
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
@@ -27,7 +26,7 @@ const useApi = (url, options = { method: 'GET', credentials: 'include' }) => {
       // login redirect
       if (res.status === 401 || res.status === 403) {
         clearUser()
-        navigate('/signin', { next: location.pathname })
+        navigate('/signin')
       }
 
       // 404 page
