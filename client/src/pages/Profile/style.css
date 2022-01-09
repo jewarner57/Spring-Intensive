@@ -1,6 +1,7 @@
 .profile-page {
   background-color: var(--bg-primary-dark);
   padding-top: 100px;
+  padding-bottom: 30px;
   min-height: 100vh;
 }
 
