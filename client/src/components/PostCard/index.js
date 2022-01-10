@@ -18,7 +18,7 @@ export default function PostCard(props) {
       <Link to={`/post/${post._id}`} className="post-detail-link">
         <div className="card-content">
           {post?.type === 'video' ?
-            <video controls autoPlay={true} loop={true} name="media" muted={true} className="video-container">
+            <video controls playsinline={true} autoPlay={true} loop={true} name="media" muted={true} className="video-container">
               <source src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} type="video/mp4"></source>
             </video>
             :
