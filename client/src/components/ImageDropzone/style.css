@@ -9,6 +9,13 @@
   z-index: 0;
 }
 
+
+@media only screen and (max-width: 825px){
+  .upload-drop-container {
+    display: none;
+  }
+}
+
 .upload-image {
   grid-area: 1 / 1 / 2 / 2;
   width: 550px;

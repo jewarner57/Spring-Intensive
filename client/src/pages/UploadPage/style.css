@@ -23,6 +23,23 @@
   background-color: var(--bg-secondary-dark);
 }
 
+@media only screen and (max-width: 825px){
+  .upload-form  {
+    max-width: none;
+    width: 70%;
+  }
+  .upload-container {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .upload-form  {
+    max-width: none;
+    width: 90%;
+  }
+}
+
 .upload-title {
   color: white;
   font-family: 'Fredoka One', cursive;
