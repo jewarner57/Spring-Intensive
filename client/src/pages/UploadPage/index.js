@@ -9,6 +9,7 @@ import UploadForm from '../../components/UploadForm';
 export default function UploadPage() {
   const [title, setTitle] = useState('')
   const [file, setFile] = useState('')
+  const [uploadType, setUploadType] = useState('image')
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -28,7 +29,13 @@ export default function UploadPage() {
 
   const isValidUploadFile = (upload) => {
     // is the file an image
-    return (upload['type'].split('/')[0] === 'image')
+    const type = upload['type'].split('/')[0]
+
+    if (type === 'image' || type === 'video') {
+      setUploadType(type)
+      return true
+    }
+    return false
   }
 
   const handleFormSubmit = async (e) => {
@@ -40,14 +47,16 @@ export default function UploadPage() {
     if (file === '') { setError('No image selected'); return }
 
     setLoading(true)
-    const location = await uploadFileToIPFS()
-    // If location is empty stop the upload
-    if (!location) {
-      setLoading(false)
-      return
-    }
 
     try {
+      // get the ipfs media hash
+      const uploadLocation = await uploadFileToIPFS()
+      // If location is empty stop the upload
+      if (!uploadLocation) {
+        setLoading(false)
+        return
+      }
+
       const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/media/save`, {
         method: 'POST',
         credentials: 'include',
@@ -55,7 +64,7 @@ export default function UploadPage() {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, location })
+        body: JSON.stringify({ title, location: uploadLocation, type: uploadType })
       });
       const content = await rawResponse.json();
 
@@ -85,7 +94,7 @@ export default function UploadPage() {
     // if the file isn't a valid upload
     if (!isValidUploadFile(file)) {
       // show an error
-      setError('Please select an image.')
+      setError('Please select an image or video.')
       return false
     }
 
@@ -94,8 +103,11 @@ export default function UploadPage() {
       const added = await client.add(file)
       return added.path
     } catch (err) {
-      setError('Error uploading file to IPFS', err.message)
+      setError('Error uploading file to IPFS')
+      console.log(err)
     }
+
+    return false
   }
 
   return (

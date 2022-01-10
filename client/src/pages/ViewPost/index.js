@@ -31,9 +31,17 @@ export default function ViewPost() {
                   <p className="post-content-date">{new ED(media.createdAt).format("%b %d, %Y")}</p>
                 </div>
               </Link>
-              <div className="post-image-wrapper">
-                <img src={`${process.env.REACT_APP_IPFS_READ_URL}${media.location}`} alt="Post Media" />
-              </div>
+
+              {media?.type === 'video' ?
+                <video controls autoPlay={true} name="media" className="post-image-wrapper">
+                  <source src={`${process.env.REACT_APP_IPFS_READ_URL}${media.location}`} type="video/mp4"></source>
+                </video>
+                :
+                <div className="post-image-wrapper">
+                  <img src={`${process.env.REACT_APP_IPFS_READ_URL}${media.location}`} alt="Post Media" />
+                </div>
+              }
+
               <div className="post-content">
                 <CommentList post={media} commentCount={media.comments} />
               </div>

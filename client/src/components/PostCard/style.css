@@ -27,9 +27,15 @@
 .image-container {
   display: flex;
   align-items: center;
+  background-color: black;
+}
+
+.video-container {
+  display: flex;
+  background-color: black;
   min-height: 200px;
   max-height: 400px;
-  background-color: black;
+  width: 100%;
 }
 
 .card-image {

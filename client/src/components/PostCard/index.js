@@ -17,9 +17,15 @@ export default function PostCard(props) {
     <div className="card-wrapper" >
       <Link to={`/post/${post._id}`} className="post-detail-link">
         <div className="card-content">
-          <div className="image-container">
-            <img className="card-image" src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} alt="post content" />
-          </div>
+          {post?.type === 'video' ?
+            <video controls autoPlay={true} loop={true} name="media" muted={true} className="video-container">
+              <source src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} type="video/mp4"></source>
+            </video>
+            :
+            <div className="image-container">
+              <img className="card-image" src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} alt="post content" />
+            </div>
+          }
           <div className="post-title">
             <p>{shortenTitle(post.title)}</p>
           </div>

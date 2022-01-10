@@ -3,15 +3,20 @@ const Like = require('../models/like')
 
 // SAVE MEDIA
 exports.savemedia = async (req, res) => {
+  console.log(req.body.type)
+  console.log(req.body.title)
+  console.log(req.body.location)
   // Send a relevant error if no hash is provided
   if (!req.body.title) { return res.status(400).send({ msg: 'Missing title' }) }
   if (!req.body.location) { return res.status(400).send({ msg: 'No media location provided' }) }
+  if (!req.body.type) { return res.status(400).send({ msg: 'No media type provided' }) }
 
   // create the media
   const newmedia = new Media({
     location: req.body.location,
     author: req.user._id,
     title: req.body.title,
+    type: req.body.type,
   })
 
   // if an identical media already exists then return an error
