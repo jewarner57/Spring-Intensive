@@ -53,14 +53,18 @@
 
 .post-header {
   display:flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 20px 15px 20px;
-  color: white;
-  text-decoration: none;
   max-width: 100%;
   background-color: var(--bg-secondary-dark);
   border-radius: 10px 10px 0 0;
+}
+
+.post-user-profile {
+  display: flex;
+  color: white;
+  text-decoration: none;
 }
 
 .button-primary {

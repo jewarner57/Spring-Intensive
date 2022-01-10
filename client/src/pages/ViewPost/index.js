@@ -5,6 +5,7 @@ import './style.css';
 import CommentList from '../../components/CommentList';
 import ED from '@jewarner57/easydate'
 import useApi from '../../hooks/useApi';
+import ShareButton from '../../components/ShareButton';
 
 export default function ViewPost() {
   const { id } = useParams();
@@ -22,18 +23,22 @@ export default function ViewPost() {
             <LoadingCircle />
             :
             <div className="post-card">
-              <Link className="post-header" to={`/profile/${media.author._id}`}>
-                <div className="button-primary">
-                  {media.author.username[0].toUpperCase()}
-                </div>
-                <div className="post-header-info">
-                  <p className="post-content-header">{media.author.username[0].toUpperCase() + media.author.username.slice(1)}</p>
-                  <p className="post-content-date">{new ED(media.createdAt).format("%b %d, %Y")}</p>
-                </div>
-              </Link>
+              <div className="post-header">
+                <Link to={`/profile/${media.author._id}`} className='post-user-profile'>
+                  <div className="button-primary">
+                    {media.author.username[0].toUpperCase()}
+                  </div>
+                  <div className="post-header-info">
+                    <p className="post-content-header">{media.author.username[0].toUpperCase() + media.author.username.slice(1)}</p>
+                    <p className="post-content-date">{new ED(media.createdAt).format("%b %d, %Y")}</p>
+                  </div>
+                </Link>
+                <ShareButton post={media} />
+              </div>
+
 
               {media?.type === 'video' ?
-                <video controls playsinline={true} autoPlay={true} loop={true} name="media" muted={true} className="post-image-wrapper">
+                <video controls playsInline={true} autoPlay={true} loop={true} name="media" muted={true} className="post-image-wrapper">
                   <source src={`${process.env.REACT_APP_IPFS_READ_URL}${media.location}`} type="video/mp4"></source>
                 </video>
                 :

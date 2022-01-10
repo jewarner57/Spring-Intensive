@@ -52,6 +52,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 10px;
   margin: 0 10px;
   border-top: 2px solid rgba(0, 0, 0, 0.247);
@@ -59,4 +60,9 @@
 
 .post-action {
   cursor: pointer;
+}
+
+.post-main-actions, .post-secondary-actions {
+  display: flex;
+  align-items: center;
 }

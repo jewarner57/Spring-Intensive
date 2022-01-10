@@ -1,0 +1,28 @@
+.share-button {
+  
+}
+
+.share-dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  background-color: var(--bg-primary-dark);
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 40%);
+  margin-top: 7px;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.share-dropdown-item {
+  color: white;
+  padding: 10px;
+  z-index: 10;
+}
+
+.share-dropdown-item:hover {
+  background-color: gray;
+  border-radius: 3px;
+}
