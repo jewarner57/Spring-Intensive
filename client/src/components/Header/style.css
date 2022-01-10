@@ -71,18 +71,12 @@
     }
 
     .navlinks {
-      margin-right: 5px;
-      max-width: 160px;
-      width: 50%;
+      margin-right: 15px;
     }
 }
 
 @media only screen and (max-width: 400px){
     .newPostButton {
       display: none;
-    }
-
-    .navlink {
-      margin: 0;
     }
 }
