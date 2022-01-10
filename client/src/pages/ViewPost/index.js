@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import './style.css';
 import CommentList from '../../components/CommentList';
 import ED from '@jewarner57/easydate'
-import useApi from '../../components/useApi';
+import useApi from '../../hooks/useApi';
 
 export default function ViewPost() {
   const { id } = useParams();

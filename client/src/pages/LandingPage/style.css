@@ -8,6 +8,12 @@
   margin: auto;
 }
 
+@media only screen and (max-width: 1400px){
+    .post-list {
+      width: 95%;
+    }
+}
+
 .caughtup-container {
   margin-top: 30px;
   display: flex;

@@ -2,7 +2,7 @@ import Comment from '../Comment';
 import LoadingCircle from '../LoadingCircle';
 import CommentForm from '../CommentForm';
 import { useEffect, useState } from 'react';
-import useApi from '../useApi';
+import useApi from '../../hooks/useApi';
 import LikeButton from '../../components/LikeButton'
 import './style.css';
 

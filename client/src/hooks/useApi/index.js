@@ -54,7 +54,7 @@ const useApi = (url, options = { method: 'GET', credentials: 'include' }) => {
     fetchApi();
   }, []);
 
-  return { loading, error, data, fetchApi }
+  return { loading, error, data }
 };
 
 export default useApi;

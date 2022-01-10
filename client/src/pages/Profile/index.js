@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
 import ED from '@jewarner57/easydate'
-import useApi from '../../components/useApi';
+import useApi from '../../hooks/useApi';
 import './style.css';
 
 export default function Profile() {

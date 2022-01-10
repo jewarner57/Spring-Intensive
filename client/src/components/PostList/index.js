@@ -1,13 +1,20 @@
 import React from 'react'
 import PostCard from '../PostCard';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import './style.css';
 
 export default function PostList(props) {
   const { posts } = props
+  const { width } = useWindowDimensions()
+
+  const getColCount = () => {
+    return Math.round(width / 400)
+  }
 
   // Divide post content over the four columns
-  // This is so that we can have grid items of different heights
-  const getPostsForColumn = (colNum, colName, colCount) => {
+  // This is so that we can have grid columns of different heights
+  const getPostsForColumn = (colNum, colName) => {
+    const colCount = getColCount()
     return (
       <div className="post-column" style={{ gridArea: colName }}>
         {posts.map((post, index) => {
@@ -22,10 +29,10 @@ export default function PostList(props) {
 
   return (
     <div className="post-container">
-      {getPostsForColumn(0, 'c1', 4)}
-      {getPostsForColumn(1, 'c2', 4)}
-      {getPostsForColumn(2, 'c3', 4)}
-      {getPostsForColumn(3, 'c4', 4)}
+      {getPostsForColumn(0, 'c1')}
+      {getPostsForColumn(1, 'c2')}
+      {getPostsForColumn(2, 'c3')}
+      {getPostsForColumn(3, 'c4')}
     </div>
   );
 }
