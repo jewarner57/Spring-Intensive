@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { create } from 'ipfs-http-client'
 import ImageDropzone from '../../components/ImageDropzone';
 import UploadForm from '../../components/UploadForm';
+import LoadingFullPage from '../../components/LoadingFullPage';
 
 export default function UploadPage() {
   const [title, setTitle] = useState('')
@@ -54,6 +55,7 @@ export default function UploadPage() {
       // If location is empty stop the upload
       if (!uploadLocation) {
         setLoading(false)
+        setError('Error uploading file.')
         return
       }
 
@@ -103,7 +105,7 @@ export default function UploadPage() {
       const added = await client.add(file)
       return added.path
     } catch (err) {
-      setError('Error uploading file to IPFS')
+      setError('Error uploading file.')
       console.log(err)
     }
 
@@ -112,6 +114,7 @@ export default function UploadPage() {
 
   return (
     <div className="upload-page">
+      {loading ? <LoadingFullPage titleText={'Uploading... Please Wait'} /> : ''}
       <div className="upload-container">
         <ImageDropzone image={file} setImage={setFileToUpload} />
         <div className="upload-form">

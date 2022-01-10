@@ -1,0 +1,19 @@
+.fullpage-loading-container {
+  width: 100%;
+  position: absolute;
+  z-index: 14;
+  background-color: rgba(0, 0, 0, 0.561);
+  height: 100vh;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullpage-loading-text {
+  color: white;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
