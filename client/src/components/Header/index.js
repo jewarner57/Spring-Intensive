@@ -24,7 +24,7 @@ export default function Header() {
             <>
               {currentUser.username ?
                 <>
-                  <Link to={`/profile/${currentUser._id}`} className="navlink"><div className="username">{currentUser.username[0].toUpperCase() + currentUser.username.slice(1)}</div></Link>
+                  <Link to={`/profile/${currentUser._id}`} className="navlink"><div className="username">My Profile</div></Link>
                   <Link to={`/profile/${currentUser._id}`} className="navlink"><div className="button-primary">{currentUser.username[0].toUpperCase()}</div></Link>
                 </>
                 : ''}
