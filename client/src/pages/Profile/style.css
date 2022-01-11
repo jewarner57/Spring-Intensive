@@ -55,6 +55,25 @@
   background-color: rgba(124, 124, 124, 0.397);
 }
 
+.user-profile-posts-title {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-profile-posts-title > p {
+  color: white;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.profile-new-post {
+  color: white;
+  border: none;
+  margin: 0;
+}
+
 .user-info {
   display: flex;
   justify-content: space-between;

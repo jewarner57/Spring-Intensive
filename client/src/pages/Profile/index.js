@@ -4,11 +4,12 @@ import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
 import ED from '@jewarner57/easydate'
 import useApi from '../../hooks/useApi';
+import { useAuth } from '../../contexts/AuthContext';
 import './style.css';
 
 export default function Profile() {
   const { id } = useParams();
-
+  const { currentUser } = useAuth()
   const { loading, error, data: { media, user } } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/${id}`)
 
   useEffect(() => {
@@ -39,6 +40,17 @@ export default function Profile() {
                 </div>
 
                 <div className="divide-line"></div>
+
+                <div className="user-profile-posts-title">
+                  {currentUser._id === id ?
+                    <>
+                      <p>Your Posts:</p>
+                      <button className="button-primary profile-new-post">New Post</button>
+                    </>
+                    :
+                    ''
+                  }
+                </div>
 
                 <PostList posts={media} />
               </div>
