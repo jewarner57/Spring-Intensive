@@ -2,15 +2,11 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Media = require('../models/media')
 
-exports.user = (req, res) => {
-  const {
-    _id, email, username, profilepic,
-  } = req.user
+exports.user = async (req, res) => {
+  const currentUser = await User.findOne({ _id: req.user._id }, '_id email username profilepic')
 
   return res.send({
-    user: {
-      _id, email, username, profilepic,
-    },
+    user: currentUser,
   })
 }
 

@@ -12,7 +12,7 @@ import PfpModal from '../../components/PfpModal';
 export default function Profile() {
   const { id } = useParams();
   const { currentUser } = useAuth()
-  const { loading, error, data: { media, user } } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/${id}`)
+  const { loading, error, data: { media, user }, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/${id}`)
   const [pfpModalOpen, setPfpModalOpen] = useState(false)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Profile() {
     <React.Fragment>
       {error ? error :
         <div className="profile-page" >
-          <PfpModal open={pfpModalOpen} setOpen={setPfpModalOpen} />
+          <PfpModal open={pfpModalOpen} setOpen={setPfpModalOpen} refetchUser={fetchApi} />
           {loading ?
             <LoadingCircle />
             :

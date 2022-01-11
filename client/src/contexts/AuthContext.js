@@ -96,13 +96,12 @@ export function AuthProvider({ children }) {
       const content = await res.json();
 
       if (res.status === 200) {
-        setCurrentUser(content.user)
+        setCurrentUser(...[content.user])
         setLoading(false)
-        return
+        return content.user
       }
       setCurrentUser()
       setLoading(false)
-
     }
     catch (err) {
       setLoading(false)
@@ -120,6 +119,7 @@ export function AuthProvider({ children }) {
     login,
     signout,
     clearUser,
+    getCurrentUser
   }
 
   return (

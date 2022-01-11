@@ -61,3 +61,8 @@
   margin-right: 0;
   cursor: pointer;
 }
+
+.error-text-pfp {
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
