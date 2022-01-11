@@ -16,8 +16,9 @@ export default function Profile() {
   const [pfpModalOpen, setPfpModalOpen] = useState(false)
 
   useEffect(() => {
+    fetchApi()
     window.scrollTo(0, 0)
-  }, [])
+  }, [id])
 
   return (
     <React.Fragment>
