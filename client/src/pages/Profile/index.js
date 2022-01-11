@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
 import ED from '@jewarner57/easydate'
@@ -57,7 +57,7 @@ export default function Profile() {
                   {currentUser._id === id ?
                     <>
                       <p>Your Posts:</p>
-                      <button className="button-primary profile-new-post">New Post</button>
+                      <Link to="/newpost"><button className="button-primary profile-new-post">New Post</button></Link>
                     </>
                     :
                     ''
