@@ -6,6 +6,7 @@ import CommentList from '../../components/CommentList';
 import ED from '@jewarner57/easydate'
 import useApi from '../../hooks/useApi';
 import ShareButton from '../../components/ShareButton';
+import ProfilePic from '../../components/ProfilePic';
 
 export default function ViewPost() {
   const { id } = useParams();
@@ -25,9 +26,7 @@ export default function ViewPost() {
             <div className="post-card">
               <div className="post-header">
                 <Link to={`/profile/${media.author._id}`} className='post-user-profile'>
-                  <div className="button-primary">
-                    {media.author.username[0].toUpperCase()}
-                  </div>
+                  <ProfilePic size={'large'} alt={media.author.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${media.author.profilepic}`} />
                   <div className="post-header-info">
                     <p className="post-content-header">{media.author.username[0].toUpperCase() + media.author.username.slice(1)}</p>
                     <p className="post-content-date">{new ED(media.createdAt).format("%b %d, %Y")}</p>

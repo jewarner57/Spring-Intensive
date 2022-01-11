@@ -6,6 +6,7 @@ import ED from '@jewarner57/easydate'
 import useApi from '../../hooks/useApi';
 import { useAuth } from '../../contexts/AuthContext';
 import './style.css';
+import ProfilePic from '../../components/ProfilePic';
 
 export default function Profile() {
   const { id } = useParams();
@@ -28,7 +29,7 @@ export default function Profile() {
               </div>
               <div className="profile-bottom">
                 <div className="pfp">
-                  <p className="pfp-initial">{user.username[0].toUpperCase()}</p>
+                  <ProfilePic size={'xlarge'} alt={user.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${user.profilepic}`} />
                 </div>
 
                 <div className="user-info">

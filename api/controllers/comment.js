@@ -18,7 +18,7 @@ exports.createComment = async (req, res) => {
     await newComment.save()
     await Media.findOneAndUpdate({ _id: postId }, { $inc: { comments: 1 } })
     // Get the comment again so we can populat the user
-    const comment = await Comment.findOne({ _id: newComment._id }).populate('user', 'username')
+    const comment = await Comment.findOne({ _id: newComment._id }).populate('user', 'username profilepic')
 
     return res.send({ comment })
   } catch (err) {
@@ -32,7 +32,7 @@ exports.getCommentsForPost = async (req, res) => {
   if (!mediaId) { return res.status(409).send({ msg: 'Missing Post ID' }) }
 
   try {
-    const comments = await Comment.find({ media: mediaId }).populate('user', 'username')
+    const comments = await Comment.find({ media: mediaId }).populate('user', 'username profilepic')
     return res.send({ comments })
   } catch (err) {
     return res.status(500).send({ msg: 'Could not get post comments', err })

@@ -31,15 +31,8 @@
 }
 
 .pfp {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  background-color: var(--teal-primary);
-  height: 70px;
-  width: 70px;
-  border-radius: 50%;
   margin-top: -100px;
+  margin-left: 10px;
 }
 
 .pfp-initial {
@@ -47,6 +40,11 @@
   user-select: none;
   font-size: 40px;
   margin: 0;
+}
+
+.pfp-container {
+  display: flex;
+  margin-left: 10px;
 }
 
 .divide-line {

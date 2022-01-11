@@ -1,8 +1,7 @@
 .comment-pfp {
-  padding: 5px 10px;
-  background-color: var(--teal-secondary);
-  border-radius: 50%;
-  margin-right: 5px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
 }
 
 .comment-poster-info {

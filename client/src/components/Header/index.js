@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
+import ProfilePic from '../ProfilePic';
 
 export default function Header() {
   const { currentUser, signout } = useAuth()
@@ -22,7 +23,9 @@ export default function Header() {
               {currentUser.username ?
                 <>
                   <Link to={`/profile/${currentUser._id}`} className="navlink"><div className="username">My Profile</div></Link>
-                  <Link to={`/profile/${currentUser._id}`} className="navlink"><div className="button-primary">{currentUser.username[0].toUpperCase()}</div></Link>
+                  <Link to={`/profile/${currentUser._id}`} className="navlink">
+                    <ProfilePic size={'med'} alt={currentUser.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${currentUser.profilepic}`} />
+                  </Link>
                 </>
                 : ''}
               <div className="navlink" onClick={() => {

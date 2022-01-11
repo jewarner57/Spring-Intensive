@@ -1,0 +1,64 @@
+.profilePicContainer {
+  border-radius: 50%;
+}
+
+.pfp-large {
+  width: 60px;
+  height: 60px;
+}
+
+.pfp-med {
+  width: 40px;
+  height: 40px;
+}
+
+.pfp-small {
+  width: 30px;
+  height: 30px;
+}
+
+.pfp-xlarge {
+  width: 130px;
+  height: 130px;
+}
+
+.profilePic {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.alt-img {
+  width: 100%;
+  padding: 50% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--teal-secondary);
+  border-radius: 50%;
+}
+
+.alt-img > p {
+  margin: 0;
+  height: 0;
+  color: white;
+  font-weight: bold;
+}
+
+.alt-xlarge {
+  background-color: var(--teal-primary);
+}
+
+.alt-xlarge > p {
+  line-height: 0.1em;
+  font-size: 2em;
+}
+
+.alt-med > p {
+  line-height: 0.1em;
+  font-size: 1.2em;
+}
+
+.alt-small > p {
+  line-height: 0.1em;
+  font-size: 1.0em;
+}

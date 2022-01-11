@@ -38,7 +38,7 @@ exports.getmediabyid = async (req, res) => {
   const mediaID = req.params.id
 
   try {
-    const media = await Media.findOne({ _id: mediaID }).populate('author', 'username')
+    const media = await Media.findOne({ _id: mediaID }).populate('author', 'username profilepic')
     if (media) {
       res.send({
         media,
@@ -54,7 +54,7 @@ exports.getusermedia = async (req, res) => {
   const mediaID = req.params.id
 
   try {
-    const media = await Media.find({ author: mediaID }).populate('author', 'username')
+    const media = await Media.find({ author: mediaID }).populate('author', 'username profilepic')
 
     res.send({ media })
   } catch (err) {
@@ -67,7 +67,7 @@ exports.getmedia = async (req, res) => {
   const { start, end } = req.params
 
   try {
-    const media = await Media.find().sort({ createdAt: -1 }).populate('author', 'username').limit(Number(end))
+    const media = await Media.find().sort({ createdAt: -1 }).populate('author', 'username profilepic').limit(Number(end))
     const mediaArr = media.slice(start, end)
 
     if (start > media.length) { return res.send({ media: [] }) }

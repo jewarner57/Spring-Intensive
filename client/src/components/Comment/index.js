@@ -1,6 +1,7 @@
 import './style.css';
 import ED from '@jewarner57/easydate'
 import { Link } from 'react-router-dom'
+import ProfilePic from '../ProfilePic';
 
 export default function Comment(props) {
   const { comment } = props
@@ -9,7 +10,9 @@ export default function Comment(props) {
     <div className="comment">
       <div className="comment-poster-info">
         <div className="comment-pfp">
-          <Link className="no-style-link" to={`/profile/${comment.user._id}`} >{comment.user.username[0].toUpperCase()}</Link>
+          <Link className="no-style-link" to={`/profile/${comment.user._id}`} >
+            <ProfilePic alt={comment.user.username[0].toUpperCase()} size={'small'} image={`${process.env.REACT_APP_IPFS_READ_URL}${comment.user.profilepic}`} />
+          </Link>
         </div>
         <div>
           <Link className="no-style-link" to={`/profile/${comment.user._id}`} >

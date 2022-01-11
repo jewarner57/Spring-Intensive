@@ -17,12 +17,12 @@ exports.user = (req, res) => {
 exports.getuserprofile = async (req, res) => {
   // find a user with given id and return it
   const userID = req.params.id
-  let userFields = 'username createdAt'
+  let userFields = 'username createdAt profilepic'
 
   // If the current user gets their own profile
   // display their email
   if (userID === req.user._id) {
-    userFields = 'username createdAt email'
+    userFields = 'username createdAt email profilepic'
   }
 
   try {
@@ -75,7 +75,7 @@ exports.signup = async (req, res) => {
 
     // save user
     await newuser.save()
-    const user = await User.findOne(newuser._id, 'email username')
+    const user = await User.findOne(newuser._id, 'email username profilepic')
 
     // send token
     const token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: '60 days' });
@@ -98,7 +98,7 @@ exports.signin = (req, res) => {
   const { email } = req.body;
   const { password } = req.body;
   // Find this user name
-  User.findOne({ email }, 'email password username')
+  User.findOne({ email }, 'email password username profilepic')
     .then((user) => {
       if (!user) {
         // User not found
@@ -113,7 +113,7 @@ exports.signin = (req, res) => {
         // Create a token
         const token = jwt.sign(
           {
-            _id: user._id, email: user.email, username: user.username,
+            _id: user._id, email: user.email, username: user.username, profilepic: user.profilepic,
           }, process.env.SECRET,
           {
             expiresIn: '30 days',
@@ -125,6 +125,7 @@ exports.signin = (req, res) => {
           _id: user._id,
           email: user.email,
           username: user.username,
+          profilepic: user.profilepic,
         }
 
         // Set a cookie
