@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './style.css';
 
 export default function ProfilePic(props) {
   const { image, size, alt } = props
   const [useAlt, setUseAlt] = useState(false)
+
+  useEffect(() => {
+    setUseAlt(false)
+  }, [image])
 
   return (
     <div className={`profilePicContainer pfp-${size}`}>

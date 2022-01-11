@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
@@ -7,11 +7,13 @@ import useApi from '../../hooks/useApi';
 import { useAuth } from '../../contexts/AuthContext';
 import './style.css';
 import ProfilePic from '../../components/ProfilePic';
+import PfpModal from '../../components/PfpModal';
 
 export default function Profile() {
   const { id } = useParams();
   const { currentUser } = useAuth()
   const { loading, error, data: { media, user } } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/${id}`)
+  const [pfpModalOpen, setPfpModalOpen] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -21,6 +23,7 @@ export default function Profile() {
     <React.Fragment>
       {error ? error :
         <div className="profile-page" >
+          <PfpModal open={pfpModalOpen} setOpen={setPfpModalOpen} />
           {loading ?
             <LoadingCircle />
             :
@@ -29,9 +32,13 @@ export default function Profile() {
               </div>
               <div className="profile-bottom">
                 <div className="pfp-container">
-                  <div class={`pfp ${id === currentUser._id ? 'pfp-edit' : ''}`}>
+                  <div className={`pfp ${id === currentUser._id ? 'pfp-edit' : ''}`}>
                     <ProfilePic size={'xlarge'} alt={user.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${user.profilepic}`} />
-                    {id === currentUser._id ? <button className="change-pfp-button">Edit Avatar</button> : ''}
+                    {id === currentUser._id ?
+                      <button className="change-pfp-button" onClick={() => setPfpModalOpen(prev => !prev)}>
+                        Edit Avatar
+                      </button>
+                      : ''}
                   </div>
                 </div>
 

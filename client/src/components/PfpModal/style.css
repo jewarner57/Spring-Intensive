@@ -1,0 +1,63 @@
+.pfp-modal-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.767);
+  z-index: 14;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pfp-modal {
+  background-color: var(--bg-primary-dark);
+  border-radius: 5px;
+}
+
+.pfp-body {
+  padding: 20px;
+  padding-top: 0;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pfp-modal-title {
+  margin: 0;
+  color: white;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.close-pfp-modal {
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+  width: 18px;
+  text-align: right;
+  padding: 10px;
+}
+
+.close-pfp-modal:hover {
+  opacity: 0.5;
+}
+
+.pfp-preview {
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.save-pfp {
+  text-align: center;
+  color: white;
+  width: 30%;
+  margin-right: 0;
+  cursor: pointer;
+}
