@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import AuthForm from '../../components/AuthForm';
 import './style.css'
 
@@ -53,6 +54,7 @@ export default function SignupPage(props) {
               }
             ]}
           />
+          <p>Don't have an account? <Link to="/signup">Signup!</Link></p>
         </div>
       </div>
     </React.Fragment >
