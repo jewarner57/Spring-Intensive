@@ -38,7 +38,7 @@ export default function ViewPost() {
 
 
               {media?.type === 'video' ?
-                <video controls playsInline={true} autoPlay={true} loop={true} name="media" muted={true} className="post-image-wrapper">
+                <video controls playsInline autoPlay loop name="media" muted className="post-image-wrapper">
                   <source src={`${process.env.REACT_APP_IPFS_READ_URL}${media.location}`} type="video/mp4"></source>
                 </video>
                 :

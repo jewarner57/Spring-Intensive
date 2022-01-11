@@ -16,22 +16,30 @@ export default function PostCard(props) {
 
   return (
     <div className="card-wrapper" >
-      <Link to={`/post/${post._id}`} className="post-detail-link">
-        <div className="card-content">
-          {post?.type === 'video' ?
-            <video controls playsInline={true} autoPlay={true} loop={true} name="media" muted={true} className="video-container">
+
+      <div className="card-content">
+        {post?.type === 'video' ?
+          <>
+            <video controls playsInline autoPlay loop name="media" muted className="video-container">
               <source src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} type="video/mp4"></source>
             </video>
-            :
+            <Link to={`/post/${post._id}`} className="post-detail-link">
+              <div className="post-title">
+                <p>{shortenTitle(post.title)}</p>
+              </div>
+            </Link>
+          </>
+          :
+          <Link to={`/post/${post._id}`} className="post-detail-link">
             <div className="image-container">
               <img className="card-image" src={`${process.env.REACT_APP_IPFS_READ_URL}${post.location}`} alt="post content" />
             </div>
-          }
-          <div className="post-title">
-            <p>{shortenTitle(post.title)}</p>
-          </div>
-        </div>
-      </Link>
+            <div className="post-title">
+              <p>{shortenTitle(post.title)}</p>
+            </div>
+          </Link>
+        }
+      </div>
       <div className="post-action-list">
         <div className="post-main-actions">
           <LikeButton post={post} />
