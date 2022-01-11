@@ -3,8 +3,15 @@ const User = require('../models/user');
 const Media = require('../models/media')
 
 exports.user = (req, res) => {
-  const { _id, email, username } = req.user
-  return res.send({ user: { _id, email, username } })
+  const {
+    _id, email, username, profilepic,
+  } = req.user
+
+  return res.send({
+    user: {
+      _id, email, username, profilepic,
+    },
+  })
 }
 
 exports.getuserprofile = async (req, res) => {
@@ -29,6 +36,26 @@ exports.getuserprofile = async (req, res) => {
   } catch (err) {
     res.status(400).send({ err: 'Something went wrong finding the profile.', message: err })
   }
+}
+
+// UPDATE PROFILE PICTURE
+exports.setProfilePic = async (req, res) => {
+  if (!req.body.location) return res.status(400).send({ msg: 'No image location sent.' })
+  const { location } = req.body
+  const update = { profilepic: location }
+
+  // get the currentUser's _id and update their pfp with the new ipfs hash location
+  const updatedUser = await User.findOneAndUpdate({ _id: req.user._id, update, new: true })
+
+  const {
+    _id, email, username, profilepic,
+  } = updatedUser
+
+  return res.send({
+    user: {
+      _id, email, username, profilepic,
+    },
+  })
 }
 
 // SIGN UP POST

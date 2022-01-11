@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true, select: false },
   email: { type: String, required: true },
+  profilepic: { type: String, required: false },
 }, { timestamps: true });
 
 // Must use function here! ES6 => functions do not bind this!

@@ -41,7 +41,7 @@ exports.getmediabyid = async (req, res) => {
     const media = await Media.findOne({ _id: mediaID }).populate('author', 'username')
     if (media) {
       res.send({
-        media
+        media,
       })
     }
   } catch (err) {
