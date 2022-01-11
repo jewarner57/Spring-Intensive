@@ -42,10 +42,12 @@ exports.getuserprofile = async (req, res) => {
 exports.setProfilePic = async (req, res) => {
   if (!req.body.location) return res.status(400).send({ msg: 'No image location sent.' })
   const { location } = req.body
-  const update = { profilepic: location }
 
   // get the currentUser's _id and update their pfp with the new ipfs hash location
-  const updatedUser = await User.findOneAndUpdate({ _id: req.user._id, update, new: true })
+  const user = await User.findOneAndUpdate(
+    { _id: req.user._id }, { $set: { profilepic: location } }, { new: true },
+  )
+  updatedUser = await user.save()
 
   const {
     _id, email, username, profilepic,
