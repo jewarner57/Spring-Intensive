@@ -28,8 +28,11 @@ export default function Profile() {
               <div className="profile-top">
               </div>
               <div className="profile-bottom">
-                <div className="pfp">
-                  <ProfilePic size={'xlarge'} alt={user.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${user.profilepic}`} />
+                <div className="pfp-container">
+                  <div class={`pfp ${id === currentUser._id ? 'pfp-edit' : ''}`}>
+                    <ProfilePic size={'xlarge'} alt={user.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${user.profilepic}`} />
+                    {id === currentUser._id ? <button className="change-pfp-button">Edit Avatar</button> : ''}
+                  </div>
                 </div>
 
                 <div className="user-info">
