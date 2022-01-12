@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Error404Page from '../../pages/Error404Page'
 
-const useApi = (url, options = { method: 'GET', credentials: 'include' }) => {
+const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: 'include' }) => {
   const { clearUser } = useAuth()
   const navigate = useNavigate()
 
@@ -16,10 +16,7 @@ const useApi = (url, options = { method: 'GET', credentials: 'include' }) => {
     setLoading(true)
 
     try {
-      const res = await fetch(url, {
-        method: 'GET',
-        credentials: 'include',
-      })
+      const res = await fetch(url, options)
 
       const content = await res.json();
 
@@ -42,19 +39,23 @@ const useApi = (url, options = { method: 'GET', credentials: 'include' }) => {
       // set the content and leave loading state
       setData(content)
       setLoading(false)
+      return { loading: false, error: '', data: content }
     }
     catch (err) {
       setLoading(false)
       setError(err.message)
-      throw new Error(err.message)
+      return { error: err.message, data: {}, loading: false }
     }
   };
 
   useEffect(() => {
-    fetchApi();
-  }, []);
+    if (autoFetch) {
+      fetchApi()
+    }
+  }, [])
 
   return { loading, error, data, fetchApi }
 };
+
 
 export default useApi;

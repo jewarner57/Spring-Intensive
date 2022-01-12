@@ -12,7 +12,7 @@ export default function CommentList(props) {
   const { loading, error, data } = useApi(`${process.env.REACT_APP_API_URL}/comment/post/get/${post._id}`)
 
   useEffect(() => {
-    setComments(data.comments)
+    setComments(data.comments ? data.comments : [])
   }, [data])
 
   return (

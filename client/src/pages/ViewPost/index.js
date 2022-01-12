@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import LoadingCircle from '../../components/LoadingCircle';
 import { useParams, Link } from 'react-router-dom';
 import './style.css';
@@ -10,9 +10,10 @@ import ProfilePic from '../../components/ProfilePic';
 
 export default function ViewPost() {
   const { id } = useParams();
-  const { loading, error, data: { media } } = useApi(`${process.env.REACT_APP_API_URL}/media/get/${id}`)
+  const { loading, error, data: { media }, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/media/get/${id}`)
 
   useEffect(() => {
+    fetchApi()
     window.scrollTo(0, 0)
   }, [id])
 
