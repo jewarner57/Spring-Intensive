@@ -1,5 +1,5 @@
 .landing-page {
-  background-color: var(--bg-primary-dark);
+  background-color: var(--landing-bg-dark);
   padding: 100px 0 50px 0;
   min-height: 100vh;
 }
