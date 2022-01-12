@@ -5,6 +5,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors')
+const logger = require('./middleware/logger')
 
 const authRoutes = require('./routes/auth')
 const mediaRoutes = require('./routes/media')
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }))
+app.use(logger)
 
 // Routes
 app.use('/user', authRoutes)
