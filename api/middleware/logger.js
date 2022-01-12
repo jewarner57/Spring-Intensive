@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs');
 const chalk = require('chalk')
 
@@ -25,10 +26,14 @@ module.exports = function logger(req, res, next) {
   const durationInMilliseconds = getActualRequestDurationInMilliseconds(start);
   const log = `[${formattedDate}] ${method}:${url} ${status} ${durationInMilliseconds.toLocaleString()} ms`;
   console.log(`[${chalk.blue(formattedDate)}] ${method}:${url} ${status} ${chalk.red(`${durationInMilliseconds.toLocaleString()}ms`)}`)
-  fs.appendFile('./logs/request_logs.txt', `${log}\n`, (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
+
+  // don't save logs in development environment
+  if (process.env.ENVIRONMENT !== 'DEVELOPMENT') {
+    fs.appendFile('./logs/request_logs.txt', `${log}\n`, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+  }
   next();
 };
