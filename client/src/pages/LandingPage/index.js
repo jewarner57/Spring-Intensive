@@ -1,20 +1,23 @@
 import React, { useState, useRef, useCallback } from 'react'
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
+import useApi from '../../hooks/useApi';
 import caughtUp from '../../images/finish-line.svg'
 import './style.css';
 
 export default function LandingPage() {
-  const [loading, setLoading] = useState(false)
-  const [posts, setPosts] = useState([])
-  const [error, setError] = useState()
+  // const [loading, setLoading] = useState(false)
+  // const [posts, setPosts] = useState([])
+  // const [error, setError] = useState()
   const [limit, setLimit] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const postLoadAmount = 20
+  const [posts, setPosts] = useState([])
+  const { loading, error, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + postLoadAmount}`, true)
 
   const observer = useRef()
   const loader = useCallback(node => {
-    if (loading) return
+    if (loading || error) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
@@ -22,35 +25,15 @@ export default function LandingPage() {
       }
     })
     if (node) observer.current.observe(node)
-  }, [loading, hasMore])
+  }, [loading, hasMore, error])
 
   const getPosts = async () => {
-    setError()
-    setLoading(true)
     setLimit((prev) => prev + postLoadAmount)
+    const { data } = await fetchApi()
 
-    try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + postLoadAmount}`, {
-        method: 'GET',
-        credentials: 'include'
-      })
-
-      const content = await res.json();
-
-      // If the response is not 200 throw an error
-      if (res.status !== 200) {
-        setError(res.msg)
-      }
-      // set the content and leave loading state
-      setPosts((prev) => [...prev, ...content.media])
-      setHasMore(content.media.length > 0)
-      setLoading(false)
-    }
-    catch (err) {
-      hasMore(false)
-      setLoading(false)
-      setError(err.message)
-      throw new Error(err.message)
+    if (data?.media) {
+      setPosts((prev) => [...prev, ...data.media])
+      setHasMore(data.media.length > 0)
     }
   }
 
@@ -58,7 +41,9 @@ export default function LandingPage() {
     <div className="landing-page">
       <div className="post-list">
         <PostList posts={posts} />
-        {error ? <p className="error">{error}</p> : ""}
+        {error ?
+          <p className="landing-error-text">{error}</p>
+          : ""}
         {hasMore ?
           <LoadingCircle />
           :

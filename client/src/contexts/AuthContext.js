@@ -105,6 +105,7 @@ export function AuthProvider({ children }) {
     }
     catch (err) {
       setLoading(false)
+      setCurrentUser()
       throw new Error(err.message)
     }
   }

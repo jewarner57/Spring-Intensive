@@ -43,7 +43,11 @@ const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: '
     }
     catch (err) {
       setLoading(false)
-      setError(err.message)
+      let errText = err.message
+      if (errText === 'Failed to fetch') {
+        errText = 'Server could not be reached. Check your internet connection.'
+      }
+      setError(errText)
       return { error: err.message, data: {}, loading: false }
     }
   };

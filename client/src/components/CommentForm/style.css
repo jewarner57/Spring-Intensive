@@ -35,3 +35,8 @@
 .comment-submit-button > svg {
   transition: all 0.4s;
 }
+
+.comment-list-error {
+  color: tomato;
+  margin: 10px 0 0 20px;
+}
