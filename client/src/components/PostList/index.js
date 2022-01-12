@@ -8,7 +8,7 @@ export default function PostList(props) {
   const { width } = useWindowDimensions()
 
   const getColCount = () => {
-    return Math.round(width / 400)
+    return Math.round(width / 400) > 4 ? 4 : Math.round(width / 400)
   }
 
   // Divide post content over the four columns
