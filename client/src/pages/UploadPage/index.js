@@ -48,7 +48,7 @@ export default function UploadPage() {
     navigate(`/post/${data.id}`)
   }
 
-  // we can't directly call create post after setUploadLocation (line 37)
+  // we can't directly call create post after setUploadLocation (line 38)
   // because the state will not have updated yet
   // so we use useEffect to trigger once the uploadLocation changes
   useEffect(() => {

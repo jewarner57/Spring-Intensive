@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ProfilePic from '../ProfilePic'
 import LoadingCircle from '../LoadingCircle'
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom'
-import { create } from 'ipfs-http-client'
+import useFileUpload from '../../hooks/useFileUpload';
+import useApi from '../../hooks/useApi';
 import './style.css';
 
 export default function PfpModal(props) {
@@ -12,103 +13,149 @@ export default function PfpModal(props) {
   const [fileLink, setFileLink] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const { currentUser, clearUser, getCurrentUser } = useAuth()
+  const [uploadLocation, setUploadLocation] = useState('')
+  const { currentUser, getCurrentUser } = useAuth()
   const navigate = useNavigate()
   let uploadRef = useRef()
-  const client = create('https://ipfs.infura.io:5001/api/v0')
+  const { uploadPhoto, loading: ipfsloading } = useFileUpload(pfpFile)
+  const { fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/setpic`, false, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ location: uploadLocation })
+  })
 
   const uploadImage = (upload) => {
-    setError()
-    // is the file a valid upload?
-    if (!isValidUploadFile(upload)) {
-      // show an error
-      setError('Please select an image.')
-      return
-    }
     setFileLink(URL.createObjectURL(upload))
     setPfpFile(upload)
   }
 
-  const isValidUploadFile = (upload) => {
-    // is the file an image
-    const type = upload['type'].split('/')[0]
-    return (type === 'image')
-  }
-
-  const handleSave = async (e) => {
-    setError()
-
-    if (!pfpFile) {
-      setOpen(false)
-      return
-    }
+  const handleSave = async () => {
     if (!currentUser) { navigate('/signin'); return }
-
+    if (pfpFile === '') { setError('No image selected'); return }
     setLoading(true)
-
-    try {
-      // get the ipfs media hash
-      const uploadLocation = await uploadFileToIPFS()
-      // If location is empty stop the upload
-      if (!uploadLocation) {
-        setLoading(false)
-        setError('Error uploading file.')
-        return
-      }
-
-      const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/profile/setpic`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ location: uploadLocation })
-      });
-      const content = await rawResponse.json();
-
-      if (rawResponse.status === 401) {
-        clearUser()
-        navigate('/signin')
-      }
-
-      // If the response is not 200 throw an error
-      if (rawResponse.status !== 200) {
-        setError(content.err)
-        throw new Error(content.err)
-      }
-      setLoading(false)
-      await refetchUser()
-      await getCurrentUser()
-      setOpen(false)
-      return
-    }
-    catch (err) {
-      setLoading(false)
-      setError(err.message)
-      throw new Error(err.message)
-    }
+    // set the upload location to the result of 
+    // calling the uploadPhoto hook
+    setUploadLocation(await uploadPhoto())
   }
 
-  const uploadFileToIPFS = async () => {
-    setError()
-    // if the file isn't a valid upload
-    if (!isValidUploadFile(pfpFile)) {
-      // show an error
-      setError('Please select an image or video.')
-      return false
+  // we can't directly call create post after setUploadLocation (line 38)
+  // because the state will not have updated yet
+  // so we use useEffect to trigger once the uploadLocation changes
+  useEffect(() => {
+    if (uploadLocation && !ipfsloading) {
+      updatePfp()
     }
+  }, [uploadLocation])
 
-    try {
-      // upload the file and return the hash
-      const added = await client.add(pfpFile)
-      return added.path
-    } catch (err) {
-      setError('Error uploading file.')
-      console.log(err)
-    }
-    return false
+  const updatePfp = async () => {
+    // call the fetchApi hook to save the post to the db
+    const { error, data } = await fetchApi()
+    setLoading(false)
+
+    if (error) { setError(error); return }
+    if (!data?.user) { setError('Something went wrong. Could not update image'); return }
+
+    refetchUser()
+    getCurrentUser()
+    setOpen(false)
   }
+
+  // const uploadImage = (upload) => {
+  //   setError()
+  //   // is the file a valid upload?
+  //   if (!isValidUploadFile(upload)) {
+  //     // show an error
+  //     setError('Please select an image.')
+  //     return
+  //   }
+  //   setFileLink(URL.createObjectURL(upload))
+  //   setPfpFile(upload)
+  // }
+
+  // const isValidUploadFile = (upload) => {
+  //   // is the file an image
+  //   const type = upload['type'].split('/')[0]
+  //   return (type === 'image')
+  // }
+
+  // const handleSave = async (e) => {
+  //   setError()
+
+  //   if (!pfpFile) {
+  //     setOpen(false)
+  //     return
+  //   }
+  //   if (!currentUser) { navigate('/signin'); return }
+
+  //   setLoading(true)
+
+  //   try {
+  //     // get the ipfs media hash
+  //     const uploadLocation = await uploadFileToIPFS()
+  //     // If location is empty stop the upload
+  //     if (!uploadLocation) {
+  //       setLoading(false)
+  //       setError('Error uploading file.')
+  //       return
+  //     }
+
+  //     const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/user/profile/setpic`, {
+  //       method: 'POST',
+  //       credentials: 'include',
+  //       headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ location: uploadLocation })
+  //     });
+  //     const content = await rawResponse.json();
+
+  //     if (rawResponse.status === 401) {
+  //       clearUser()
+  //       navigate('/signin')
+  //     }
+
+  //     // If the response is not 200 throw an error
+  //     if (rawResponse.status !== 200) {
+  //       setError(content.err)
+  //       throw new Error(content.err)
+  //     }
+  //     setLoading(false)
+  //     await refetchUser()
+  //     await getCurrentUser()
+  //     setOpen(false)
+  //     return
+  //   }
+  //   catch (err) {
+  //     setLoading(false)
+  //     setError(err.message)
+  //     throw new Error(err.message)
+  //   }
+  // }
+
+  // const uploadFileToIPFS = async () => {
+  //   setError()
+  //   // if the file isn't a valid upload
+  //   if (!isValidUploadFile(pfpFile)) {
+  //     // show an error
+  //     setError('Please select an image or video.')
+  //     return false
+  //   }
+
+  //   try {
+  //     // upload the file and return the hash
+  //     const added = await client.add(pfpFile)
+  //     return added.path
+  //   } catch (err) {
+  //     setError('Error uploading file.')
+  //     console.log(err)
+  //   }
+  //   return false
+  // }
 
   return (
     <>
