@@ -24,7 +24,7 @@ export default function UploadPage() {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ title, location: uploadLocation, type: type })
+    body: JSON.stringify({ title, location: uploadLocation, type: type, private: true })
   })
 
   const handleFormSubmit = async (e) => {
@@ -77,7 +77,7 @@ export default function UploadPage() {
               {
                 id: "file", label: 'Image', required: false, type: 'file',
                 val: file.name, setVal: setFile
-              }
+              },
             ]}
           />
         </div>

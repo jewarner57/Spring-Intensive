@@ -43,11 +43,31 @@
   opacity: 80%;
 }
 
+.plain-navlink {
+  text-decoration: none;
+}
+
 .button-primary {
   padding: 10px;
   background-color: var(--teal-secondary);
   font-weight: bold;
   border-radius: 2px;
+}
+
+.newPostButton {
+  transition: all 0.2s;
+  color: white;
+  max-width: 200px;
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(162deg, rgba(112,190,149,1) 39%, rgba(80,132,132,1) 64%);
+  background-position: 0% 0%;
+  background-size: 200% 200%;
+}
+
+.newPostButton:hover {
+  transition: all 0.2s;
+  background-position: 60% 60%;
 }
 
 .username {
@@ -80,3 +100,4 @@
       margin-right: 15px;
     }
 }
+

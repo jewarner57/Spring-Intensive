@@ -52,13 +52,76 @@
 }
 
 .post-header {
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 20px 20px 15px 20px;
   max-width: 100%;
   background-color: var(--bg-secondary-dark);
   border-radius: 10px 10px 0 0;
+}
+
+.post-hidden-tip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--bg-primary-dark)
+}
+
+.post-hidden-tip > .post-hidden-text {
+  color: white;
+  cursor: pointer;
+  padding: 10px 0;
+  margin-left: 10px;
+}
+
+.post-hidden-tip > .post-hidden-text:hover ~ .hidden-text-tooltip {
+  transition: 0.2s all;
+  display: block;
+  opacity: 1;
+}
+
+.hidden-text-tooltip {
+  transition: 0.2s all;
+  opacity: 0;
+  position: absolute;
+  color: rgb(255, 255, 255);
+  background-color: var(--bg-primary-dark);
+  padding: 10px;
+  max-width: 200px;
+  border-radius: 5px;
+  margin-top: 160px;
+  margin-left: 220px;
+}
+
+.hidden-text-tooltip > span {
+  color: var(--teal-secondary);
+}
+
+.post-hidden-tip > div > span {
+  color: var(--teal-secondary);
+}
+
+.share-with-public {
+  transition: all 0.2s;
+  color: white;
+  max-width: 200px;
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(162deg, rgba(112,190,149,1) 39%, rgba(80,132,132,1) 64%);
+  background-position: 0% 0%;
+  background-size: 200% 200%;
+
+}
+
+.share-with-public:hover {
+  transition: all 0.2s;
+  background-position: 60% 60%;
+}
+
+.poster-info {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .post-user-profile {

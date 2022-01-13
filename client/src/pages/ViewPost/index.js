@@ -26,14 +26,21 @@ export default function ViewPost() {
             :
             <div className="post-card">
               <div className="post-header">
-                <Link to={`/profile/${media.author._id}`} className='post-user-profile'>
-                  <ProfilePic size={'large'} alt={media.author.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${media.author.profilepic}`} />
-                  <div className="post-header-info">
-                    <p className="post-content-header">{media.author.username[0].toUpperCase() + media.author.username.slice(1)}</p>
-                    <p className="post-content-date">{new ED(media.createdAt).format("%b %d, %Y")}</p>
-                  </div>
-                </Link>
-                <ShareButton post={media} />
+                <div className="post-hidden-tip">
+                  <div className="button-primary share-with-public">Share With Community</div>
+                  <div className="post-hidden-text">This post is currently <span>hidden</span>.</div>
+                  <div className="hidden-text-tooltip">This post can still be shared by its link, but will not appear publicly in feeds or your profile. Click <span>Share With Community</span> to make it public.</div>
+                </div>
+                <div className="poster-info">
+                  <Link to={`/profile/${media.author._id}`} className='post-user-profile'>
+                    <ProfilePic size={'large'} alt={media.author.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${media.author.profilepic}`} />
+                    <div className="post-header-info">
+                      <p className="post-content-header">{media.author.username[0].toUpperCase() + media.author.username.slice(1)}</p>
+                      <p className="post-content-date">{new ED(media.createdAt).format("%b %d, %Y")}</p>
+                    </div>
+                  </Link>
+                  <ShareButton post={media} />
+                </div>
               </div>
 
 

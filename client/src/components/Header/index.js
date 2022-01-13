@@ -13,7 +13,7 @@ export default function Header() {
       <div className="navbar">
         <div className="navbrand">
           <Link to="/" className="navlink"><img className="branding-logo" src={logo} alt="inmige logo" /></Link>
-          <Link to="/newpost" className="navlink"><div className="button-primary newPostButton">New Post</div></Link>
+          <Link to="/newpost" className="plain-navlink"><div className="button-primary newPostButton">New Post</div></Link>
         </div>
         <div className="navlinks">
           {/* is the user logged in */}
