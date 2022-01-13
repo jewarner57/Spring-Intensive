@@ -1,5 +1,5 @@
 .post-container {
-  margin-top: 30px;
+  margin-top: 10px;
   display: grid;
   justify-items: center;
   grid-template-areas: "c1 c2 c3 c4";

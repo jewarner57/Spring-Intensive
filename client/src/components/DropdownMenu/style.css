@@ -1,0 +1,23 @@
+.dropdown-menu {
+  padding: 5px;
+  color: rgb(226, 226, 226);
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  border-bottom: 2px solid rgb(226, 226, 226);
+  max-width: 250px;
+}
+
+.dropdown-menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.dropdown-title {
+  font-size: 1.2em;
+  color: white;
+  margin:0 0 0 20px;
+}

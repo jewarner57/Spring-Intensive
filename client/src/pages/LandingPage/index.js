@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react'
+import DropdownMenu from '../../components/DropdownMenu';
 import LoadingCircle from '../../components/LoadingCircle';
 import PostList from '../../components/PostList';
 import useApi from '../../hooks/useApi';
@@ -35,9 +36,26 @@ export default function LandingPage() {
     }
   }
 
+  const changePostSort = (sort) => {
+    setSort(sort)
+    reloadPosts()
+  }
+
+  const reloadPosts = () => {
+    setHasMore(true)
+    setPosts([])
+    setLimit(0)
+    fetchApi()
+  }
+
   return (
     <div className="landing-page">
       <div className="post-list">
+        <DropdownMenu value={sort} setValue={changePostSort} title='Inmige Feed:' options={[
+          { title: 'Newest', value: 'newest' },
+          { title: 'Most Liked', value: 'mostliked' },
+          { title: 'Most Comments', value: 'mostcommented' },
+        ]} />
         <PostList posts={posts} />
         {error ?
           <p className="landing-error-text">{error}</p>
