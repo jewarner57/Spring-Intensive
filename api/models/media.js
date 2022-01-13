@@ -9,6 +9,7 @@ const MediaSchema = new Schema({
   type: { type: String, enum: ['image', 'video'] },
   likes: { type: Number, required: true, default: 0 },
   comments: { type: Number, required: true, default: 0 },
+  private: { type: Boolean, required: true, default: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Media', MediaSchema);

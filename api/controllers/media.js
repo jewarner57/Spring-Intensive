@@ -48,10 +48,16 @@ exports.getmediabyid = async (req, res) => {
 
 // GET A USER'S MEDIA
 exports.getusermedia = async (req, res) => {
-  const mediaID = req.params.id
+  const authorID = req.params.id
+  let query = { author: authorID, private: false }
 
   try {
-    const media = await Media.find({ author: mediaID }).populate('author', 'username profilepic')
+    // if this is the current user's profile, send their hidden posts
+    if (authorID === req.user._id) {
+      query = { author: authorID }
+    }
+
+    const media = await Media.find(query).populate('author', 'username profilepic')
 
     res.send({ media })
   } catch (err) {
@@ -64,7 +70,8 @@ exports.getmedia = async (req, res) => {
   const { start, end } = req.params
 
   try {
-    const media = await Media.find().sort({ createdAt: -1 }).populate('author', 'username profilepic').limit(Number(end))
+    // Get all public posts within range start, end
+    const media = await Media.find({ private: false }).sort({ createdAt: -1 }).populate('author', 'username profilepic').limit(Number(end))
     const mediaArr = media.slice(start, end)
 
     if (start > media.length) { return res.send({ media: [] }) }
@@ -78,7 +85,6 @@ exports.getmedia = async (req, res) => {
 exports.likeMedia = async (req, res) => {
   const mediaID = req.body.post_id
   if (!mediaID) { return res.status(400).send({ msg: 'Missing Post ID' }) }
-
 
   // If a like already exists then remove it
   const likeExists = await Like.findOne({ user: req.user._id, media: mediaID })
@@ -111,4 +117,23 @@ exports.isLiked = async (req, res) => {
 
   const isLiked = await Like.findOne({ user: userId, media: mediaId })
   res.send({ liked: Boolean(isLiked) })
+}
+
+exports.sharePostWithCommunity = async (req, res) => {
+  const mediaId = req.body.post_id
+  if (!mediaId) { return res.status(400).send({ msg: 'Missing Post ID' }) }
+  const userId = req.user._id
+
+  try {
+    const mediaToShare = await Media.findOne({ _id: mediaId })
+
+    // if the currentUser is the author
+    if (String(mediaToShare.author) === String(userId)) {
+      await Media.findOneAndUpdate({ _id: mediaId }, { $set: { private: false } })
+      return res.send({ success: true })
+    }
+    return res.status(401).send({ success: false, msg: 'Cannot update other users posts.' })
+  } catch (err) {
+    return res.status(404).send({ success: false, msg: 'Post not found.', err })
+  }
 }

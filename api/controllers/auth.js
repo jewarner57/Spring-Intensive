@@ -13,17 +13,19 @@ exports.user = async (req, res) => {
 exports.getuserprofile = async (req, res) => {
   // find a user with given id and return it
   const userID = req.params.id
+  let query = { author: userID, private: false }
   let userFields = 'username createdAt profilepic'
 
   // If the current user gets their own profile
   // display their email
   if (userID === req.user._id) {
     userFields = 'username createdAt email profilepic'
+    query = { author: userID }
   }
 
   try {
     const user = await User.findOne({ _id: userID }, userFields)
-    const media = await Media.find({ author: userID }).populate('author', 'username')
+    const media = await Media.find(query).populate('author', 'username')
 
     if (user) {
       return res.send({ user, media })

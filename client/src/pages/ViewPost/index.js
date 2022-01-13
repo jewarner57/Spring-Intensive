@@ -7,9 +7,11 @@ import ED from '@jewarner57/easydate'
 import useApi from '../../hooks/useApi';
 import ShareButton from '../../components/ShareButton';
 import ProfilePic from '../../components/ProfilePic';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function ViewPost() {
   const { id } = useParams();
+  const { currentUser } = useAuth()
   const { loading, error, data: { media }, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/media/get/${id}`)
 
   useEffect(() => {
@@ -26,11 +28,13 @@ export default function ViewPost() {
             :
             <div className="post-card">
               <div className="post-header">
-                <div className="post-hidden-tip">
-                  <div className="button-primary share-with-public">Share With Community</div>
-                  <div className="post-hidden-text">This post is currently <span>hidden</span>.</div>
-                  <div className="hidden-text-tooltip">This post can still be shared by its link, but will not appear publicly in feeds or your profile. Click <span>Share With Community</span> to make it public.</div>
-                </div>
+                {media.private === true && media.author._id === currentUser._id ?
+                  < div className="post-hidden-tip">
+                    <div className="button-primary share-with-public">Share With Community</div>
+                    <div className="post-hidden-text">This post is currently <span>hidden</span>.</div>
+                    <div className="hidden-text-tooltip">This post can still be shared by its link, but will not appear publicly in feeds or your profile. Click <span>Share With Community</span> to make it public.</div>
+                  </div>
+                  : ''}
                 <div className="poster-info">
                   <Link to={`/profile/${media.author._id}`} className='post-user-profile'>
                     <ProfilePic size={'large'} alt={media.author.username[0].toUpperCase()} image={`${process.env.REACT_APP_IPFS_READ_URL}${media.author.profilepic}`} />
@@ -61,6 +65,6 @@ export default function ViewPost() {
           }
         </div >
       }
-    </React.Fragment>
+    </React.Fragment >
   );
 }
