@@ -51,7 +51,7 @@ export default function LandingPage() {
   return (
     <div className="landing-page">
       <div className="post-list">
-        <DropdownMenu value={sort} setValue={changePostSort} title='Inmige Feed:' options={[
+        <DropdownMenu border={true} value={sort} setValue={changePostSort} title='Inmige Feed:' options={[
           { title: 'Newest', value: 'newest' },
           { title: 'Most Liked', value: 'mostliked' },
           { title: 'Most Comments', value: 'mostcommented' },

@@ -6,8 +6,11 @@
   outline: none;
   font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
-  border-bottom: 2px solid rgb(226, 226, 226);
   max-width: 250px;
+}
+
+.dropdown-border {
+  border-bottom: 2px solid rgb(226, 226, 226);
 }
 
 .dropdown-menu-wrapper {

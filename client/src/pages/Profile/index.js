@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import LoadingCircle from '../../components/LoadingCircle';
+import DropdownMenu from '../../components/DropdownMenu'
 import PostList from '../../components/PostList';
 import ED from '@jewarner57/easydate'
 import useApi from '../../hooks/useApi';
@@ -56,7 +57,11 @@ export default function Profile() {
                 <div className="user-profile-posts-title">
                   {currentUser._id === id ?
                     <>
-                      <p>Your Posts:</p>
+                      <DropdownMenu options={[
+                        { title: 'Newest', value: 'newest' },
+                        { title: 'Most Liked', value: 'mostliked' },
+                        { title: 'Most Comments', value: 'mostcommented' },
+                      ]} />
                       <Link to="/newpost"><button className="button-primary profile-new-post">New Post</button></Link>
                     </>
                     :
