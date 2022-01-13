@@ -65,13 +65,27 @@ exports.getusermedia = async (req, res) => {
   }
 }
 
+function getSortObj(sort) {
+  switch (sort) {
+    case 'newest':
+      return { createdAt: -1 }
+    case 'mostliked':
+      return { likes: -1 }
+    case 'mostcommented':
+      return { comments: -1 }
+    default:
+      return { createdAt: -1 }
+  }
+}
+
 // GET MEDIA
 exports.getmedia = async (req, res) => {
-  const { start, end } = req.params
+  const { start, end, sort } = req.params
+  const sortObj = getSortObj(sort)
 
   try {
     // Get all public posts within range start, end
-    const media = await Media.find({ private: false }).sort({ createdAt: -1 }).populate('author', 'username profilepic').limit(Number(end))
+    const media = await Media.find({ private: false }).sort(sortObj).populate('author', 'username profilepic').limit(Number(end))
     const mediaArr = media.slice(start, end)
 
     if (start > media.length) { return res.send({ media: [] }) }

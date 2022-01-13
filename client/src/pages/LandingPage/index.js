@@ -6,14 +6,12 @@ import caughtUp from '../../images/finish-line.svg'
 import './style.css';
 
 export default function LandingPage() {
-  // const [loading, setLoading] = useState(false)
-  // const [posts, setPosts] = useState([])
-  // const [error, setError] = useState()
+  const [sort, setSort] = useState('newest')
   const [limit, setLimit] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const postLoadAmount = 20
   const [posts, setPosts] = useState([])
-  const { loading, error, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + postLoadAmount}`, true)
+  const { loading, error, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/media/get/${limit}/${limit + postLoadAmount}/${sort}`, true)
 
   const observer = useRef()
   const loader = useCallback(node => {

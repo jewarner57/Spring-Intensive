@@ -25,7 +25,7 @@ exports.getuserprofile = async (req, res) => {
 
   try {
     const user = await User.findOne({ _id: userID }, userFields)
-    const media = await Media.find(query).populate('author', 'username')
+    const media = await Media.find(query).sort({ createdAt: -1 }).populate('author', 'username')
 
     if (user) {
       return res.send({ user, media })
