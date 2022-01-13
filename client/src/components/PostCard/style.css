@@ -66,3 +66,16 @@
   display: flex;
   align-items: center;
 }
+
+.private-post-indicator {
+  border-radius: 15px;
+  color: rgb(175, 175, 175);
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.private-post-indicator > svg {
+  margin-left: 5px;
+}

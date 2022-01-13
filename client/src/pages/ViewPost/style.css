@@ -71,7 +71,6 @@
   color: white;
   cursor: pointer;
   padding: 10px 0;
-  margin-left: 10px;
 }
 
 .post-hidden-tip > .post-hidden-text:hover ~ .hidden-text-tooltip {
@@ -90,7 +89,7 @@
   max-width: 200px;
   border-radius: 5px;
   margin-top: 160px;
-  margin-left: 220px;
+  margin-left: 215px;
 }
 
 .hidden-text-tooltip > span {
