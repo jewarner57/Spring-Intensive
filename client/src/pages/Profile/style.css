@@ -99,6 +99,15 @@
   border: none;
   margin: 0;
   cursor: pointer;
+  transition: all 0.2s;
+  background: linear-gradient(162deg, rgba(112,190,149,1) 39%, rgba(80,132,132,1) 64%);
+  background-position: 0% 0%;
+  background-size: 200% 200%;
+}
+
+.profile-new-post:hover {
+  transition: all 0.2s;
+  background-position: 60% 60%;
 }
 
 .user-info {
