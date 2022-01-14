@@ -1,5 +1,6 @@
 const Media = require('../models/media')
 const Like = require('../models/like')
+const getSortObj = require('../util/getSortObj')
 
 // SAVE MEDIA
 exports.savemedia = async (req, res) => {
@@ -62,19 +63,6 @@ exports.getusermedia = async (req, res) => {
     res.send({ media })
   } catch (err) {
     res.status(404).send({ msg: 'Unable to find user\'s posts.', err })
-  }
-}
-
-function getSortObj(sort) {
-  switch (sort) {
-    case 'newest':
-      return { createdAt: -1 }
-    case 'mostliked':
-      return { likes: -1 }
-    case 'mostcommented':
-      return { comments: -1 }
-    default:
-      return { createdAt: -1 }
   }
 }
 

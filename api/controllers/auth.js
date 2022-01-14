@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Media = require('../models/media')
+const getSortObj = require('../util/getSortObj')
 
 exports.user = async (req, res) => {
   const currentUser = await User.findOne({ _id: req.user._id }, '_id email username profilepic')
@@ -10,6 +11,7 @@ exports.user = async (req, res) => {
   })
 }
 
+// GET A USER PROFILE
 exports.getuserprofile = async (req, res) => {
   // find a user with given id and return it
   const userID = req.params.id
@@ -23,9 +25,13 @@ exports.getuserprofile = async (req, res) => {
     query = { author: userID }
   }
 
+  // get the post sort obj
+  const sortString = req.params.sort
+  const sortObj = getSortObj(sortString)
+
   try {
     const user = await User.findOne({ _id: userID }, userFields)
-    const media = await Media.find(query).sort({ createdAt: -1 }).populate('author', 'username')
+    const media = await Media.find(query).sort(sortObj).populate('author', 'username')
 
     if (user) {
       return res.send({ user, media })

@@ -7,7 +7,7 @@ const router = express.Router()
 const authController = require('../controllers/auth')
 
 router.get('/', isAuth, authController.user)
-router.get('/profile/:id', isAuth, authController.getuserprofile)
+router.get('/profile/:id/:sort', isAuth, authController.getuserprofile)
 router.post('/profile/setpic', isAuth, authController.setProfilePic)
 router.post('/signin', validateinput, authController.signin)
 router.post('/signup', validateinput, authController.signup)

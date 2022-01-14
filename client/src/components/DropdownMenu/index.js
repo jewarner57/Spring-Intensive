@@ -5,8 +5,8 @@ export default function DropdownMenu(props) {
 
   return (
     <div className="dropdown-menu-wrapper">
-      <p class="dropdown-title">{title}</p>
-      <select className={`dropdown-menu ${border ? 'dropdown-border' : ''}`} value={value} onChange={(e) => { setValue(e.target.value); console.log(e.target.value) }}>
+      <p className="dropdown-title">{title}</p>
+      <select className={`dropdown-menu ${border ? 'dropdown-border' : ''}`} value={value} onChange={(e) => { setValue(e.target.value) }}>
         {options.map((option, index) => {
           return <option key={`${option.value}${index}`} value={option.value}>{option.title}</option>
         })}

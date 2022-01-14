@@ -13,13 +13,14 @@ import PfpModal from '../../components/PfpModal';
 export default function Profile() {
   const { id } = useParams();
   const { currentUser } = useAuth()
-  const { loading, error, data: { media, user }, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/${id}`)
+  const [sort, setSort] = useState('newest')
+  const { loading, error, data: { media, user }, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/user/profile/${id}/${sort}`)
   const [pfpModalOpen, setPfpModalOpen] = useState(false)
 
   useEffect(() => {
     fetchApi()
     window.scrollTo(0, 0)
-  }, [id])
+  }, [id, sort])
 
   return (
     <React.Fragment>
@@ -57,10 +58,12 @@ export default function Profile() {
                 <div className="user-profile-posts-title">
                   {currentUser._id === id ?
                     <>
-                      <DropdownMenu options={[
+                      <DropdownMenu value={sort} setValue={setSort} options={[
                         { title: 'Newest', value: 'newest' },
                         { title: 'Most Liked', value: 'mostliked' },
                         { title: 'Most Comments', value: 'mostcommented' },
+                        { title: 'Hidden', value: 'hidden' },
+                        { title: 'Public', value: 'public' },
                       ]} />
                       <Link to="/newpost"><button className="button-primary profile-new-post">New Post</button></Link>
                     </>
