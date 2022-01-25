@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import useApi from '../../hooks/useApi';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function CommentForm(props) {
   const { setComments, postID } = props
   const [commentText, setCommentText] = useState('')
+  const navigate = useNavigate()
+  const { currentUser } = useAuth()
   const { error, data, fetchApi } = useApi(`${process.env.REACT_APP_API_URL}/comment/create/`, false, {
     method: 'POST',
     credentials: 'include',
@@ -21,6 +25,7 @@ export default function CommentForm(props) {
 
   const createComment = async (e) => {
     e.preventDefault()
+    if (!currentUser) { return navigate('/signin') }
     setCommentText('')
     fetchApi()
   }

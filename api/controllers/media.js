@@ -34,16 +34,18 @@ exports.savemedia = async (req, res) => {
 // GET MEDIA BY ID
 exports.getmediabyid = async (req, res) => {
   const mediaID = req.params.id
+  console.log(mediaID)
 
   try {
     const media = await Media.findOne({ _id: mediaID }).populate('author', 'username profilepic')
     if (media) {
-      res.send({
+      return res.send({
         media,
       })
     }
+    return res.status(404).send({ msg: 'No post found with that ID.', err })
   } catch (err) {
-    res.status(404).send({ msg: 'Unable to find post.', err })
+    return res.status(500).send({ msg: 'Server encountered an error finding post.', err })
   }
 }
 

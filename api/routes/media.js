@@ -6,7 +6,7 @@ const router = express.Router()
 const mediaController = require('../controllers/media')
 
 router.post('/save', isAuth, mediaController.savemedia)
-router.get('/get/:id', isAuth, mediaController.getmediabyid)
+router.get('/get/:id', mediaController.getmediabyid)
 router.get('/get/user/:id', isAuth, mediaController.getusermedia)
 router.get('/get/:start/:end/:sort', mediaController.getmedia)
 router.post('/like', isAuth, mediaController.likeMedia)

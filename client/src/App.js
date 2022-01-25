@@ -23,10 +23,10 @@ export default function App() {
 
           <Route exact path="/signin" element={<SigninPage />} />
           <Route exact path="/signup" element={<SignupPage />} />
+          <Route exact path="/post/:id" element={<ViewPost />} />
 
           <Route element={<RequireAuth />}>
             <Route exact path="/newpost" element={<UploadPage />} />
-            <Route exact path="/post/:id" element={<ViewPost />} />
             <Route path="/profile/:id" element={<Profile />} />
           </Route>
 

@@ -7,6 +7,6 @@ const commentController = require('../controllers/comment')
 
 router.post('/create', isAuth, commentController.createComment)
 
-router.get('/post/get/:id', isAuth, commentController.getCommentsForPost)
+router.get('/post/get/:id', commentController.getCommentsForPost)
 
 module.exports = router

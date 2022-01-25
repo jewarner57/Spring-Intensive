@@ -17,7 +17,6 @@ const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: '
 
     try {
       const res = await fetch(url, options)
-
       const content = await res.json();
 
       // login redirect
