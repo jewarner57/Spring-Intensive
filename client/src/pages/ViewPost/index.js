@@ -8,6 +8,8 @@ import useApi from '../../hooks/useApi';
 import ShareButton from '../../components/ShareButton';
 import ProfilePic from '../../components/ProfilePic';
 import PostSharePrompt from '../../components/PostSharePrompt';
+import Error404Page from '../Error404Page'
+import GeneralErrorPage from '../GeneralErrorPage'
 
 export default function ViewPost() {
   const { id } = useParams();
@@ -21,7 +23,9 @@ export default function ViewPost() {
 
   return (
     <React.Fragment>
-      {error ? error :
+      {error ? 
+        (error === '404: Resource not found' ? <Error404Page /> : <GeneralErrorPage msg={error} />)
+      :
         <div className="view-post-page">
           {!loading && media ?
             <div className="post-card">

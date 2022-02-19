@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Error404Page from '../../pages/Error404Page'
-import GeneralErrorPage from '../../pages/GeneralErrorPage'
 
 const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: 'include' }) => {
   const { clearUser } = useAuth()
@@ -28,14 +26,14 @@ const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: '
 
       // 404 page
       if (res.status === 404) {
-        setError(<Error404Page />)
+        setError('404: Resource not found')
         return
       }
 
       // If the response is not 200 throw an error
       if (res.status !== 200) {
         console.log(content)
-        setError(<GeneralErrorPage msg={`Server says: ${content.msg}`}/>)
+        setError(`Server says: ${content.msg}`)
         return
       }
 
@@ -50,7 +48,7 @@ const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: '
       if (errText === 'Failed to fetch') {
         errText = "Server could not be reached. Check your internet connection."
       }
-      setError(<GeneralErrorPage msg={errText} />)
+      setError(errText)
       return { error: err.message, data: {}, loading: false }
     }
   };
