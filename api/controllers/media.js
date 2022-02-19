@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const Media = require('../models/media')
 const Like = require('../models/like')
 const getSortObj = require('../util/getSortObj')
@@ -22,7 +23,6 @@ exports.savemedia = async (req, res) => {
   if (alreadyExists) { return res.status(409).send({ msg: 'Media Already Saved' }) }
 
   // save the media and return its location
-
   try {
     const media = await newmedia.save()
     res.send({ msg: 'Media Saved Successfully', hash: media.location, id: media._id })
@@ -34,10 +34,19 @@ exports.savemedia = async (req, res) => {
 // GET MEDIA BY ID
 exports.getmediabyid = async (req, res) => {
   const mediaID = req.params.id
-  console.log(mediaID)
+
+  // Check if the mediaID is a valid Object ID
+  let mediaObjectID = ''
+  try {
+    mediaObjectID = mongoose.Types.ObjectId(mediaID);
+  } catch (err) {
+    console.log(err)
+    // Send 404 on failure
+    return res.status(404).send({ msg: 'No post found with that ID.', err })
+  }
 
   try {
-    const media = await Media.findOne({ _id: mediaID }).populate('author', 'username profilepic')
+    const media = await Media.findOne({ _id: mediaObjectID }).populate('author', 'username profilepic')
     if (media) {
       return res.send({
         media,
