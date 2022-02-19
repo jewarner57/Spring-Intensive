@@ -30,7 +30,7 @@ export default function PostSharePrompt(props) {
   return (
     <>
       {
-        media.private === true && media.author._id === currentUser._id && isPrivate ?
+        media.private === true && media.author._id === currentUser?._id && isPrivate ?
           <div className="post-hidden-tip">
             <div className="button-primary share-with-public" onClick={() => sharePost()}>Share With Community</div>
             <div className="post-hidden-text">This post is currently <span>hidden</span>.</div>
