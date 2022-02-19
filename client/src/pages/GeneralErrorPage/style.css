@@ -1,0 +1,25 @@
+.error-general {
+  height: 100vh;
+  background-color: var(--bg-primary-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error-general > img {
+  min-width: 300px;
+  width: 30%;
+}
+
+.title-general {
+  margin: 5px;
+}
+
+.desc-general {
+  margin: 10px 30px 30px 30px;
+  font-size: 1.1em;
+  text-align: center;
+}

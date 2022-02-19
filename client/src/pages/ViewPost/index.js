@@ -22,10 +22,8 @@ export default function ViewPost() {
   return (
     <React.Fragment>
       {error ? error :
-        <div className="view-post-page" >
-          {loading ?
-            <LoadingCircle />
-            :
+        <div className="view-post-page">
+          {!loading && media ?
             <div className="post-card">
               <div className="post-header">
                 <PostSharePrompt media={media} />
@@ -41,7 +39,6 @@ export default function ViewPost() {
                 </div>
               </div>
 
-
               {media?.type === 'video' ?
                 <video controls playsInline autoPlay loop name="media" muted className="post-image-wrapper">
                   <source src={`${process.env.REACT_APP_IPFS_READ_URL}${media.location}`} type="video/mp4"></source>
@@ -56,6 +53,8 @@ export default function ViewPost() {
                 <CommentList post={media} commentCount={media.comments} />
               </div>
             </div>
+            :
+            <LoadingCircle />
           }
         </div >
       }
