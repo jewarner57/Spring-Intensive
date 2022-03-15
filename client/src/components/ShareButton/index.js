@@ -11,7 +11,7 @@ export default function ShareButton(props) {
   }
 
   const copyPostLink = () => {
-    navigator.clipboard.writeText(`${process.env.REACT_APP_CLIENT_URL}/#/post/${post._id}`)
+    navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL}/#/post/${post._id}`)
   }
 
   const downloadMedia = async () => {
