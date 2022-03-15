@@ -24,7 +24,7 @@
 - You will need to make sure your local mongodb engine is running for storing user accounts.
 
 ##  <a name='Linktoapplicationdemo'></a>Link App
-- Check out the live project deployed at: [www.jonathanewarner.com/inmige/](https://www.jonathanewarner.com/inmige/)
+- Check out the live project deployed at: [inmige.in](https://inmige.in)
 
 ##  <a name='Screenshotsofapp'></a>Screenshots of app
 ![upload page](./client/src/images/app-profile-screenshot.png)
