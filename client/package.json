@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "env-cmd -f .env.production.local npm run build",
-    "deploy": "echo \"https://inmige.in\" > ./build/CNAME && gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
