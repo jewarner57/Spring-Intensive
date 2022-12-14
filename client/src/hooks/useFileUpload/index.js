@@ -1,8 +1,22 @@
 import { useState } from "react"
+import { Buffer } from 'buffer';
 import { create } from 'ipfs-http-client'
 
 const useFileUpload = (file) => {
-  const client = create('https://ipfs.infura.io:5001/api/v0')
+  const projectId = process.env.REACT_APP_INFURA_PROJECT_ID;
+  const api_key = process.env.REACT_APP_INFURA_API_KEY;
+  const auth =
+    'Basic ' + Buffer.from(projectId + ':' + api_key).toString('base64');
+
+  const client = create({
+    host: process.env.REACT_APP_IPFS_GATEWAY,
+    port: process.env.REACT_APP_IPFS_PORT,
+    protocol: 'https',
+    headers: {
+      authorization: auth,
+    },
+  });
+
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [type, setType] = useState('')
