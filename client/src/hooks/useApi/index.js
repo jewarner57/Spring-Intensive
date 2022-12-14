@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const useApi = (url, autoFetch = true, options = { method: 'GET' }) => {
+const useApi = (url, autoFetch = true, options = { method: 'GET', credentials: 'include'}) => {
   const { clearUser } = useAuth()
   const navigate = useNavigate()
 

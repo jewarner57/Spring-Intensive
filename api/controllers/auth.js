@@ -133,7 +133,7 @@ exports.signin = (req, res) => {
         }
 
         // Set a cookie
-        res.cookie('vfToken', token, { maxAge: 900000, httpOnly: true });
+        res.cookie('vfToken', token, { maxAge: 2592000, sameSite: 'none', secure: true });
         res.json({ message: 'Login Successful', user: resUser })
       });
     })
