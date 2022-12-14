@@ -83,7 +83,7 @@ exports.signup = async (req, res) => {
 
     // send token
     const token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: '60 days' });
-    res.cookie('vfToken', token, { maxAge: 2592000, httpOnly: true });
+    res.cookie('vfToken', token, { maxAge: 2592000 });
     res.json({ message: 'Account Creation Successful.', user })
   } catch (err) {
     console.log(err.message);
