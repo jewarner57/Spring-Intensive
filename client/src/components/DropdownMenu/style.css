@@ -13,6 +13,11 @@
   border-bottom: 2px solid rgb(226, 226, 226);
 }
 
+.dropdown-menu > option {
+  color: black;
+  background-color: white;
+}
+
 .dropdown-menu-wrapper {
   display: flex;
   justify-content: space-between;
