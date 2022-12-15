@@ -93,7 +93,7 @@ exports.signup = async (req, res) => {
 
 // LOGOUT
 exports.signout = (req, res) => {
-  res.clearCookie('vfToken');
+  res.clearCookie('vfToken', { sameSite: 'none', secure: true });
   res.json({ message: 'Logout Successful' })
 }
 
